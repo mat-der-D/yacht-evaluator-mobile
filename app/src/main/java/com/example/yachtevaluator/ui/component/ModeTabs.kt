@@ -57,7 +57,7 @@ fun ModeTabs(
                 }
         ) {
             Text(
-                text = "\uD83C\uDFAE ${stringResource(R.string.mode_play)}",
+                text = "\uD83C\uDFB2 ${stringResource(R.string.mode_play)}",
                 style = MaterialTheme.typography.titleMedium,
                 color = if (currentMode == GameMode.PLAY) PlayPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.semantics {
