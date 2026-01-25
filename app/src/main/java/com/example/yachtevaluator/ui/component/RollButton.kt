@@ -46,7 +46,7 @@ fun RollButton(
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
-            text = "($remainingRolls)",
+            text = stringResource(R.string.rolls_left, remainingRolls),
             style = MaterialTheme.typography.labelMedium
         )
     }

@@ -88,12 +88,12 @@ fun ScoreRow(
             modifier = modifier
                 .fillMaxWidth()
                 .background(backgroundColor)
-                .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(48.dp),
+                    .height(48.dp)
+                    .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {

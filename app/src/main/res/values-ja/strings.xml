@@ -12,8 +12,9 @@
     <string name="dice_unlocked">ロック解除</string>
 
     <!-- Actions -->
-    <string name="roll_dice">ダイスを振る</string>
+    <string name="roll_dice">🎲を振る</string>
     <string name="rolls_remaining">残り%1$d回</string>
+    <string name="rolls_left">(残%1$d回)</string>
     <string name="evaluate">評価を見る</string>
     <string name="reset">リセット</string>
     <string name="confirm">確定</string>

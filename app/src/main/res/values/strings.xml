@@ -12,8 +12,9 @@
     <string name="dice_unlocked">Unlocked</string>
 
     <!-- Actions -->
-    <string name="roll_dice">Roll Dice</string>
+    <string name="roll_dice">Roll 🎲s</string>
     <string name="rolls_remaining">%1$d rolls remaining</string>
+    <string name="rolls_left">(%1$d Left)</string>
     <string name="evaluate">Evaluate</string>
     <string name="reset">Reset</string>
     <string name="confirm">Confirm</string>
