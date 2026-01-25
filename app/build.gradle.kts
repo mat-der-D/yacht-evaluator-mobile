@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
     implementation(libs.moshi)
+    ksp(libs.moshi.kotlin)
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)

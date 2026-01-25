@@ -69,7 +69,10 @@ fun EvaluationPanel(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = if (evaluationState is EvaluationUiState.Error) "エラー" else "評価値",
+                    text = if (evaluationState is EvaluationUiState.Error)
+                        stringResource(R.string.error_title)
+                    else
+                        stringResource(R.string.evaluation_title),
                     style = MaterialTheme.typography.headlineMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -106,7 +109,7 @@ fun EvaluationPanel(
                 is EvaluationUiState.Success -> {
                     // Current score info
                     Text(
-                        text = "現在の合計スコア: ${currentScore}点\n※ 期待値は最終スコアの見込みです",
+                        text = stringResource(R.string.current_score_info, currentScore),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(bottom = 16.dp)
@@ -162,7 +165,10 @@ private fun RecommendationItem(
     val roundedEV = (recommendation.expectedValue * 100).toInt() / 100.0
     val roundedBestEV = (bestExpectedValue * 100).toInt() / 100.0
     val diff = roundedBestEV - roundedEV
-    val diffMessage = if (diff == 0.0) "(Best)" else String.format("(Best - %.2f)", diff)
+    val diffMessage = if (diff == 0.0)
+        stringResource(R.string.best)
+    else
+        stringResource(R.string.best_minus_format, diff)
 
     Row(
         modifier = modifier
@@ -177,7 +183,7 @@ private fun RecommendationItem(
                 is Recommendation.Dice -> {
                     if (recommendation.diceToHold.isEmpty()) {
                         Text(
-                            text = "すべて振り直す",
+                            text = stringResource(R.string.reroll_all),
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface
                         )
@@ -194,7 +200,7 @@ private fun RecommendationItem(
                             }
                         }
                         Text(
-                            text = "$diceText を残す",
+                            text = stringResource(R.string.hold_dice_format, diceText),
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface
                         )
@@ -204,7 +210,7 @@ private fun RecommendationItem(
                 is Recommendation.CategoryChoice -> {
                     val categoryName = stringResource(recommendation.category.getDisplayNameResId())
                     Text(
-                        text = "${categoryName}確定",
+                        text = stringResource(R.string.confirm_category_format, categoryName),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurface
                     )
@@ -212,7 +218,7 @@ private fun RecommendationItem(
             }
 
             Text(
-                text = String.format("期待値 %.2f 点 %s", roundedEV, diffMessage),
+                text = stringResource(R.string.expected_value_format, roundedEV) + " " + diffMessage,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

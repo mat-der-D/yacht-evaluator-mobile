@@ -41,6 +41,15 @@
 
     <!-- Evaluation -->
     <string name="evaluation_results">Evaluation Results</string>
+    <string name="evaluation_title">Evaluation</string>
+    <string name="error_title">Error</string>
+    <string name="current_score_info">Current total score: %1$d\n※ Expected value is the final score estimate</string>
+    <string name="reroll_all">Reroll all</string>
+    <string name="hold_dice_format">Hold %1$s</string>
+    <string name="confirm_category_format">Confirm %1$s</string>
+    <string name="expected_value_format">Expected value %.2f</string>
+    <string name="best">(Best)</string>
+    <string name="best_minus_format">(Best - %.2f)</string>
     <string name="expected_value">EV: %.1f</string>
     <string name="hold_dice">Hold: %1$s</string>
     <string name="select_category">Select: %1$s</string>
