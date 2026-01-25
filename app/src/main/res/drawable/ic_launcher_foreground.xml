@@ -4,26 +4,43 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- Dice icon for Yacht game -->
+
+    <!-- Dice (moved right) -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M34,34h40v40h-40z"
-        android:strokeWidth="2"
-        android:strokeColor="#3B82F6"/>
-    <!-- Dots on dice -->
+        android:pathData="M36,36h32v32h-32z"
+        android:strokeWidth="2.5"
+        android:strokeColor="#FFFFFF"/>
+
+    <!-- Dice dots (showing 5) -->
     <path
         android:fillColor="#3B82F6"
-        android:pathData="M44,44m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
+        android:pathData="M42,42m-2.5,0a2.5,2.5 0,1 1,5 0a2.5,2.5 0,1 1,-5 0"/>
     <path
         android:fillColor="#3B82F6"
-        android:pathData="M54,54m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
+        android:pathData="M62,42m-2.5,0a2.5,2.5 0,1 1,5 0a2.5,2.5 0,1 1,-5 0"/>
     <path
         android:fillColor="#3B82F6"
-        android:pathData="M64,64m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
+        android:pathData="M52,52m-2.5,0a2.5,2.5 0,1 1,5 0a2.5,2.5 0,1 1,-5 0"/>
     <path
         android:fillColor="#3B82F6"
-        android:pathData="M44,64m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
+        android:pathData="M42,62m-2.5,0a2.5,2.5 0,1 1,5 0a2.5,2.5 0,1 1,-5 0"/>
     <path
         android:fillColor="#3B82F6"
-        android:pathData="M64,44m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
+        android:pathData="M62,62m-2.5,0a2.5,2.5 0,1 1,5 0a2.5,2.5 0,1 1,-5 0"/>
+
+    <!-- Magnifying glass (overlapping bottom right of dice) -->
+    <!-- Circle with inverted color -->
+    <path
+        android:fillColor="#3B82F6"
+        android:pathData="M64,64m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0"
+        android:strokeWidth="3"
+        android:strokeColor="#FFFFFF"/>
+
+    <!-- Handle -->
+    <path
+        android:pathData="M70,70 L75,75"
+        android:strokeWidth="3"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"/>
 </vector>
