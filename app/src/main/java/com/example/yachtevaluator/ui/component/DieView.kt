@@ -21,7 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.yachtevaluator.domain.model.GameMode
 import com.example.yachtevaluator.ui.theme.DiceBackground
 import com.example.yachtevaluator.ui.theme.DiceBorder
 import com.example.yachtevaluator.ui.theme.DiceDot
@@ -33,10 +36,12 @@ fun DieView(
     isLocked: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    gameMode: GameMode = GameMode.PLAY
 ) {
-    val borderColor = if (isLocked) DiceLockedBorder else DiceBorder
-    val borderWidth = if (isLocked) 3.dp else 2.dp
+    val borderColor = if (isLocked && gameMode == GameMode.PLAY) DiceLockedBorder else DiceBorder
+    val borderWidth = if (isLocked && gameMode == GameMode.PLAY) 3.dp else 2.dp
+    val showLock = isLocked && gameMode == GameMode.PLAY
 
     Box(
         modifier = modifier
@@ -52,10 +57,10 @@ fun DieView(
     ) {
         DiceDots(value = value)
 
-        if (isLocked) {
+        if (showLock) {
             Text(
                 text = "\uD83D\uDD12", // Lock emoji
-                style = MaterialTheme.typography.labelSmall,
+                style = TextStyle(fontSize = 20.sp),
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(2.dp)

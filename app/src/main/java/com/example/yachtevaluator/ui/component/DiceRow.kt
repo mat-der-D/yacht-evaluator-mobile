@@ -37,6 +37,7 @@ fun DiceRow(
                     GameMode.PLAY -> rollCount != RollCount.ZERO
                     GameMode.ANALYSIS -> true
                 },
+                gameMode = gameMode,
                 modifier = Modifier.width(56.dp)
             )
         }
