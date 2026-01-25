@@ -55,7 +55,7 @@ fun ScoreRow(
     modifier: Modifier = Modifier
 ) {
     val isConfirmed = confirmedScore != null
-    val backgroundColor = if (isConfirmed) ConfirmedScoreBackground else MaterialTheme.colorScheme.surface
+    val backgroundColor = MaterialTheme.colorScheme.surface
     val showConfirmButton = !isConfirmed && rollCount != RollCount.ZERO
     val isAnalysisMode = gameMode == GameMode.ANALYSIS
 
