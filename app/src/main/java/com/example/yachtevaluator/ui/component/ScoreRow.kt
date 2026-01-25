@@ -147,11 +147,12 @@ fun ScoreRow(
                                 containerColor = MaterialTheme.colorScheme.primary,
                                 contentColor = MaterialTheme.colorScheme.onPrimary
                             ),
+                            contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 12.dp),
                             modifier = Modifier.height(32.dp)
                         ) {
                             Text(
-                                text = stringResource(R.string.confirm),
-                                style = MaterialTheme.typography.labelSmall
+                                text = "✓",
+                                style = MaterialTheme.typography.titleMedium
                             )
                         }
                     }
@@ -235,11 +236,12 @@ fun ScoreRow(
                             containerColor = MaterialTheme.colorScheme.primary,
                             contentColor = MaterialTheme.colorScheme.onPrimary
                         ),
+                        contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 12.dp),
                         modifier = Modifier.height(32.dp)
                     ) {
                         Text(
-                            text = stringResource(R.string.confirm),
-                            style = MaterialTheme.typography.labelSmall
+                            text = "✓",
+                            style = MaterialTheme.typography.titleMedium
                         )
                     }
                 }
