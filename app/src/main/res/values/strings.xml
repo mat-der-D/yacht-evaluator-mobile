@@ -21,17 +21,17 @@
     <string name="close">Close</string>
 
     <!-- Score categories -->
-    <string name="category_ace">Ace</string>
-    <string name="category_deuce">Deuce</string>
-    <string name="category_trey">Trey</string>
-    <string name="category_four">Four</string>
-    <string name="category_five">Five</string>
-    <string name="category_six">Six</string>
+    <string name="category_ace">Aces</string>
+    <string name="category_deuce">Deuces</string>
+    <string name="category_trey">Threes</string>
+    <string name="category_four">Fours</string>
+    <string name="category_five">Fives</string>
+    <string name="category_six">Sixes</string>
     <string name="category_choice">Choice</string>
-    <string name="category_four_of_a_kind">Four of a Kind</string>
+    <string name="category_four_of_a_kind">4 of a Kind</string>
     <string name="category_full_house">Full House</string>
     <string name="category_small_straight">S. Straight</string>
-    <string name="category_big_straight">B. Straight</string>
+    <string name="category_big_straight">L. Straight</string>
     <string name="category_yacht">Yacht</string>
 
     <!-- Score section -->
