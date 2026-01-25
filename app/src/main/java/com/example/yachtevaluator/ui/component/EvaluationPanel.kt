@@ -9,15 +9,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -45,6 +42,7 @@ import com.example.yachtevaluator.ui.theme.Outline
 fun EvaluationPanel(
     evaluationState: EvaluationUiState,
     gameMode: GameMode,
+    currentScore: Int,
     onDismiss: () -> Unit,
     onApplyRecommendation: (Recommendation) -> Unit,
     modifier: Modifier = Modifier
@@ -71,7 +69,7 @@ fun EvaluationPanel(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = stringResource(R.string.evaluation_results),
+                    text = if (evaluationState is EvaluationUiState.Error) "エラー" else "評価値",
                     style = MaterialTheme.typography.headlineMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -89,7 +87,7 @@ fun EvaluationPanel(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             when (evaluationState) {
                 is EvaluationUiState.Loading -> {
@@ -106,12 +104,23 @@ fun EvaluationPanel(
                 }
 
                 is EvaluationUiState.Success -> {
+                    // Current score info
+                    Text(
+                        text = "現在の合計スコア: ${currentScore}点\n※ 期待値は最終スコアの見込みです",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+
+                    val bestEV = evaluationState.recommendations.maxOfOrNull { it.expectedValue } ?: 0.0
+
                     LazyColumn(
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         items(evaluationState.recommendations) { recommendation ->
                             RecommendationItem(
                                 recommendation = recommendation,
+                                bestExpectedValue = bestEV,
                                 gameMode = gameMode,
                                 onApply = { onApplyRecommendation(recommendation) }
                             )
@@ -145,29 +154,35 @@ fun EvaluationPanel(
 @Composable
 private fun RecommendationItem(
     recommendation: Recommendation,
+    bestExpectedValue: Double,
     gameMode: GameMode,
     onApply: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
-        )
+    val roundedEV = (recommendation.expectedValue * 100).toInt() / 100.0
+    val roundedBestEV = (bestExpectedValue * 100).toInt() / 100.0
+    val diff = roundedBestEV - roundedEV
+    val diffMessage = if (diff == 0.0) "(Best)" else String.format("(Best - %.2f)", diff)
+
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp, horizontal = 4.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                when (recommendation) {
-                    is Recommendation.Dice -> {
-                        val diceText = recommendation.diceToHold.joinToString(" ") { die ->
+        // Left: Recommendation text
+        Column(modifier = Modifier.weight(1f)) {
+            when (recommendation) {
+                is Recommendation.Dice -> {
+                    if (recommendation.diceToHold.isEmpty()) {
+                        Text(
+                            text = "すべて振り直す",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    } else {
+                        val diceText = recommendation.diceToHold.joinToString("") { die ->
                             when (die) {
                                 1 -> "\u2680"
                                 2 -> "\u2681"
@@ -179,51 +194,57 @@ private fun RecommendationItem(
                             }
                         }
                         Text(
-                            text = stringResource(R.string.hold_dice, diceText),
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    }
-
-                    is Recommendation.CategoryChoice -> {
-                        val categoryName = stringResource(recommendation.category.getDisplayNameResId())
-                        Text(
-                            text = stringResource(R.string.select_category, categoryName),
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                            text = "$diceText を残す",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
 
-                Text(
-                    text = String.format("EV: %.1f", recommendation.expectedValue),
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
+                is Recommendation.CategoryChoice -> {
+                    val categoryName = stringResource(recommendation.category.getDisplayNameResId())
+                    Text(
+                        text = "${categoryName}確定",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
             }
 
-            if (gameMode == GameMode.PLAY) {
-                Spacer(modifier = Modifier.height(12.dp))
-                HorizontalDivider(color = Outline.copy(alpha = 0.5f))
-                Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = String.format("期待値 %.2f 点 %s", roundedEV, diffMessage),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
 
-                Button(
-                    onClick = onApply,
-                    modifier = Modifier.align(Alignment.End),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary,
-                        contentColor = MaterialTheme.colorScheme.onPrimary
-                    )
-                ) {
-                    Text(
-                        text = when (recommendation) {
-                            is Recommendation.Dice -> stringResource(R.string.apply)
-                            is Recommendation.CategoryChoice -> stringResource(R.string.confirm)
-                        },
-                        style = MaterialTheme.typography.labelMedium
-                    )
-                }
+        // Right: Button
+        val showButton = when {
+            gameMode == GameMode.PLAY -> true
+            gameMode == GameMode.ANALYSIS && recommendation is Recommendation.CategoryChoice -> true
+            else -> false
+        }
+
+        if (showButton) {
+            Button(
+                onClick = onApply,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                ),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(8.dp),
+                modifier = Modifier.size(56.dp)
+            ) {
+                Text(
+                    text = when (recommendation) {
+                        is Recommendation.Dice -> "🔒"
+                        is Recommendation.CategoryChoice -> "✓"
+                    },
+                    style = MaterialTheme.typography.headlineSmall
+                )
             }
         }
     }
+
+    HorizontalDivider(color = Outline.copy(alpha = 0.3f), thickness = 1.dp)
 }

@@ -190,6 +190,7 @@ fun GameScreen(
             EvaluationPanel(
                 evaluationState = uiState.evaluationState,
                 gameMode = gameState.mode,
+                currentScore = gameState.scoreSheet.finalTotal,
                 onDismiss = { viewModel.onIntent(GameIntent.DismissEvaluation) },
                 onApplyRecommendation = { recommendation ->
                     viewModel.onIntent(GameIntent.ApplyRecommendation(recommendation))
