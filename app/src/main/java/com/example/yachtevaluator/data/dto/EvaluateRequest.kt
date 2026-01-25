@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 data class EvaluateRequest(
     val scoreSheet: ScoreSheetDto,
     val dice: List<Int>,
-    val rollCount: Int
+    val rollCount: Int  // Must be 1, 2, or 3 (never 0)
 )
 
 @JsonClass(generateAdapter = true)
