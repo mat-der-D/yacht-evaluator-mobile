@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ヨット評価機</string>
+
+    <!-- Mode tabs -->
+    <string name="mode_play">遊ぶ</string>
+    <string name="mode_analysis">分析する</string>
+
+    <!-- Dice -->
+    <string name="dice_description">ダイス%1$dは%2$dを表示</string>
+    <string name="dice_locked">ロック中</string>
+    <string name="dice_unlocked">ロック解除</string>
+
+    <!-- Actions -->
+    <string name="roll_dice">ダイスを振る</string>
+    <string name="rolls_remaining">残り%1$d回</string>
+    <string name="evaluate">評価を見る</string>
+    <string name="reset">リセット</string>
+    <string name="confirm">確定</string>
+    <string name="apply">適用</string>
+    <string name="close">閉じる</string>
+
+    <!-- Score categories -->
+    <string name="category_ace">エース</string>
+    <string name="category_deuce">デュース</string>
+    <string name="category_trey">トレイ</string>
+    <string name="category_four">フォー</string>
+    <string name="category_five">ファイブ</string>
+    <string name="category_six">シックス</string>
+    <string name="category_choice">チョイス</string>
+    <string name="category_four_of_a_kind">フォーダイス</string>
+    <string name="category_full_house">フルハウス</string>
+    <string name="category_small_straight">S.ストレート</string>
+    <string name="category_big_straight">B.ストレート</string>
+    <string name="category_yacht">ヨット</string>
+
+    <!-- Score section -->
+    <string name="upper_total">小計</string>
+    <string name="bonus">ボーナス</string>
+    <string name="total">合計</string>
+
+    <!-- Evaluation -->
+    <string name="evaluation_results">評価結果</string>
+    <string name="expected_value">期待値: %.1f</string>
+    <string name="hold_dice">キープ: %1$s</string>
+    <string name="select_category">選択: %1$s</string>
+
+    <!-- Errors -->
+    <string name="error_evaluation_failed">評価に失敗しました。もう一度お試しください。</string>
+    <string name="error_network">ネットワークエラー。接続を確認してください。</string>
+</resources>

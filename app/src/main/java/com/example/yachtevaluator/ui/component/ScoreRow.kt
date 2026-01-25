@@ -54,8 +54,9 @@ fun ScoreRow(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         // Category name
+        val categoryName = stringResource(category.getDisplayNameResId())
         Text(
-            text = category.displayName,
+            text = categoryName,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.weight(1f)
@@ -75,7 +76,7 @@ fun ScoreRow(
                     }
                 )
                 .semantics {
-                    contentDescription = "${category.displayName}: ${confirmedScore ?: predictedScore ?: 0} points"
+                    contentDescription = "$categoryName: ${confirmedScore ?: predictedScore ?: 0} points"
                 },
             contentAlignment = Alignment.Center
         ) {

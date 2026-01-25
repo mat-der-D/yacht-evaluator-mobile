@@ -1,21 +1,23 @@
 package com.example.yachtevaluator.domain.model
 
-enum class Category(val displayName: String, val isUpper: Boolean) {
+import com.example.yachtevaluator.R
+
+enum class Category(val isUpper: Boolean) {
     // Upper section
-    ACE("Ace", true),
-    DEUCE("Deuce", true),
-    TREY("Trey", true),
-    FOUR("Four", true),
-    FIVE("Five", true),
-    SIX("Six", true),
+    ACE(true),
+    DEUCE(true),
+    TREY(true),
+    FOUR(true),
+    FIVE(true),
+    SIX(true),
 
     // Lower section
-    CHOICE("Choice", false),
-    FOUR_OF_A_KIND("Four of a Kind", false),
-    FULL_HOUSE("Full House", false),
-    SMALL_STRAIGHT("S. Straight", false),
-    BIG_STRAIGHT("B. Straight", false),
-    YACHT("Yacht", false);
+    CHOICE(false),
+    FOUR_OF_A_KIND(false),
+    FULL_HOUSE(false),
+    SMALL_STRAIGHT(false),
+    BIG_STRAIGHT(false),
+    YACHT(false);
 
     companion object {
         val upperCategories: List<Category> = entries.filter { it.isUpper }
@@ -51,5 +53,20 @@ enum class Category(val displayName: String, val isUpper: Boolean) {
         SMALL_STRAIGHT -> "smallStraight"
         BIG_STRAIGHT -> "bigStraight"
         YACHT -> "yacht"
+    }
+
+    fun getDisplayNameResId(): Int = when (this) {
+        ACE -> R.string.category_ace
+        DEUCE -> R.string.category_deuce
+        TREY -> R.string.category_trey
+        FOUR -> R.string.category_four
+        FIVE -> R.string.category_five
+        SIX -> R.string.category_six
+        CHOICE -> R.string.category_choice
+        FOUR_OF_A_KIND -> R.string.category_four_of_a_kind
+        FULL_HOUSE -> R.string.category_full_house
+        SMALL_STRAIGHT -> R.string.category_small_straight
+        BIG_STRAIGHT -> R.string.category_big_straight
+        YACHT -> R.string.category_yacht
     }
 }

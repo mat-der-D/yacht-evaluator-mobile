@@ -179,15 +179,16 @@ private fun RecommendationItem(
                             }
                         }
                         Text(
-                            text = "Hold: $diceText",
+                            text = stringResource(R.string.hold_dice, diceText),
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
 
                     is Recommendation.CategoryChoice -> {
+                        val categoryName = stringResource(recommendation.category.getDisplayNameResId())
                         Text(
-                            text = "Select: ${recommendation.category.displayName}",
+                            text = stringResource(R.string.select_category, categoryName),
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
