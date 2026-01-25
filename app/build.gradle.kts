@@ -21,12 +21,17 @@ android {
     }
 
     buildTypes {
+        debug {
+            // Debug build type (default settings)
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Use debug signing config for testing release builds
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {

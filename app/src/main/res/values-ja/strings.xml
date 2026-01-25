@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ヨット評価機</string>
+    <string name="app_name">ヨット評価</string>
 
     <!-- Mode tabs -->
     <string name="mode_play">遊ぶ</string>
