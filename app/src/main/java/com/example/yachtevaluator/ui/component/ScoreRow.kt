@@ -60,13 +60,8 @@ fun ScoreRow(
     val isAnalysisMode = gameMode == GameMode.ANALYSIS
 
     // Local state for text input in analysis mode
-    var inputText by remember { mutableStateOf(confirmedScore?.toString() ?: "") }
+    var inputText by remember(confirmedScore) { mutableStateOf(confirmedScore?.toString() ?: "") }
     var validationError by remember { mutableStateOf("") }
-
-    // Update input when confirmedScore changes externally
-    if (isConfirmed && inputText != confirmedScore.toString()) {
-        inputText = confirmedScore.toString()
-    }
 
     // Validate input
     val validateAndUpdate = { text: String ->
