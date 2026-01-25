@@ -3,6 +3,7 @@ package com.example.yachtevaluator.domain.calculator
 import com.example.yachtevaluator.domain.model.Category
 
 object ScoreValidator {
+    private val FULL_HOUSE_INVALID_VALUES = setOf(1, 2, 3, 4, 6, 29)
 
     fun isValidScore(category: Category, value: Int?): Boolean {
         if (value == null) return true
@@ -20,7 +21,7 @@ object ScoreValidator {
             // Lower section
             Category.CHOICE -> value in 5..30  // Min: 5 ones, Max: 5 sixes
             Category.FOUR_OF_A_KIND -> value == 0 || value in 5..30
-            Category.FULL_HOUSE -> value == 0 || value in 5..30
+            Category.FULL_HOUSE -> value in 0..30 && value !in FULL_HOUSE_INVALID_VALUES
             Category.SMALL_STRAIGHT -> value == 0 || value == 15
             Category.BIG_STRAIGHT -> value == 0 || value == 30
             Category.YACHT -> value == 0 || value == 50

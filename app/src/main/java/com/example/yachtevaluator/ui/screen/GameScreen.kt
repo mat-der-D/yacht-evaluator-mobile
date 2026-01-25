@@ -177,6 +177,9 @@ fun GameScreen(
                     onScoreClick = { category ->
                         // In analysis mode, could open a score edit dialog
                         // For now, this is a placeholder
+                    },
+                    onScoreUpdate = { category, value ->
+                        viewModel.onIntent(GameIntent.UpdateScore(category, value))
                     }
                 )
 

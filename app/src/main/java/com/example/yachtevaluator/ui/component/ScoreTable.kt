@@ -23,6 +23,7 @@ fun ScoreTable(
     rollCount: RollCount,
     onConfirmScore: (Category) -> Unit,
     onScoreClick: (Category) -> Unit,
+    onScoreUpdate: (Category, Int?) -> Unit = { _, _ -> },
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
@@ -35,7 +36,8 @@ fun ScoreTable(
                 gameMode = gameMode,
                 rollCount = rollCount,
                 onConfirm = { onConfirmScore(category) },
-                onScoreClick = { onScoreClick(category) }
+                onScoreClick = { onScoreClick(category) },
+                onScoreUpdate = { value -> onScoreUpdate(category, value) }
             )
             HorizontalDivider(color = Outline, thickness = 1.dp)
         }
@@ -64,7 +66,8 @@ fun ScoreTable(
                 gameMode = gameMode,
                 rollCount = rollCount,
                 onConfirm = { onConfirmScore(category) },
-                onScoreClick = { onScoreClick(category) }
+                onScoreClick = { onScoreClick(category) },
+                onScoreUpdate = { value -> onScoreUpdate(category, value) }
             )
             HorizontalDivider(color = Outline, thickness = 1.dp)
         }
