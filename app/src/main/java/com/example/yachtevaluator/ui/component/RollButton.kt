@@ -2,6 +2,7 @@ package com.example.yachtevaluator.ui.component
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -28,9 +29,11 @@ fun RollButton(
     Button(
         onClick = onClick,
         enabled = isEnabled,
-        modifier = modifier.semantics {
-            contentDescription = "Roll dice, $remainingRolls rolls remaining"
-        },
+        modifier = modifier
+            .height(48.dp)
+            .semantics {
+                contentDescription = "Roll dice, $remainingRolls rolls remaining"
+            },
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary
