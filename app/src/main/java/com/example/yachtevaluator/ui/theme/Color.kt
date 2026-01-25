@@ -7,12 +7,14 @@ val PlayPrimary = Color(0xFF3B82F6)
 val PlayPrimaryContainer = Color(0xFFDBEAFE)
 val PlayOnPrimary = Color.White
 val PlaySecondary = Color(0xFF60A5FA)
+val PlayBackground = Color(0xFFF0F7FF)  // Very light blue
 
 // Analysis mode colors (Orange)
 val AnalysisPrimary = Color(0xFFF97316)
 val AnalysisPrimaryContainer = Color(0xFFFED7AA)
 val AnalysisOnPrimary = Color.White
 val AnalysisSecondary = Color(0xFFFB923C)
+val AnalysisBackground = Color(0xFFFFF4ED)  // Very light orange
 
 // Common colors
 val Background = Color(0xFFFAFAFA)

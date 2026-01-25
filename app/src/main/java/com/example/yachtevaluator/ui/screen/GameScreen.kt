@@ -154,7 +154,14 @@ fun GameScreen(
                         onClick = { showResetDialog = true },
                         modifier = Modifier.semantics {
                             contentDescription = "Reset game"
-                        }
+                        },
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = MaterialTheme.colorScheme.primary
+                        ),
+                        border = androidx.compose.foundation.BorderStroke(
+                            1.dp,
+                            MaterialTheme.colorScheme.primary
+                        )
                     ) {
                         Text(
                             text = stringResource(R.string.reset),

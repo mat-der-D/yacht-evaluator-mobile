@@ -11,21 +11,24 @@ data class ModeColors(
     val primary: androidx.compose.ui.graphics.Color,
     val primaryContainer: androidx.compose.ui.graphics.Color,
     val onPrimary: androidx.compose.ui.graphics.Color,
-    val secondary: androidx.compose.ui.graphics.Color
+    val secondary: androidx.compose.ui.graphics.Color,
+    val background: androidx.compose.ui.graphics.Color
 )
 
 val PlayModeColors = ModeColors(
     primary = PlayPrimary,
     primaryContainer = PlayPrimaryContainer,
     onPrimary = PlayOnPrimary,
-    secondary = PlaySecondary
+    secondary = PlaySecondary,
+    background = PlayBackground
 )
 
 val AnalysisModeColors = ModeColors(
     primary = AnalysisPrimary,
     primaryContainer = AnalysisPrimaryContainer,
     onPrimary = AnalysisOnPrimary,
-    secondary = AnalysisSecondary
+    secondary = AnalysisSecondary,
+    background = AnalysisBackground
 )
 
 val LocalModeColors = staticCompositionLocalOf { PlayModeColors }
@@ -57,7 +60,8 @@ fun YachtEvaluatorTheme(
         primary = modeColors.primary,
         primaryContainer = modeColors.primaryContainer,
         onPrimary = modeColors.onPrimary,
-        secondary = modeColors.secondary
+        secondary = modeColors.secondary,
+        background = modeColors.background
     )
 
     CompositionLocalProvider(LocalModeColors provides modeColors) {
