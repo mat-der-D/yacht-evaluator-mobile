@@ -1,6 +1,7 @@
 package com.example.yachtevaluator.ui.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 import com.example.yachtevaluator.R
 import com.example.yachtevaluator.domain.model.GameMode
 import com.example.yachtevaluator.ui.theme.AnalysisPrimary
@@ -30,7 +32,9 @@ fun ModeTabs(
 
     TabRow(
         selectedTabIndex = selectedIndex,
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(60.dp),
         containerColor = MaterialTheme.colorScheme.surface,
         contentColor = MaterialTheme.colorScheme.primary,
         indicator = { tabPositions ->
@@ -46,9 +50,11 @@ fun ModeTabs(
         Tab(
             selected = currentMode == GameMode.PLAY,
             onClick = { onModeChange(GameMode.PLAY) },
-            modifier = Modifier.semantics {
-                contentDescription = "Play mode tab"
-            }
+            modifier = Modifier
+                .height(60.dp)
+                .semantics {
+                    contentDescription = "Play mode tab"
+                }
         ) {
             Text(
                 text = "\uD83C\uDFAE ${stringResource(R.string.mode_play)}",
@@ -63,9 +69,11 @@ fun ModeTabs(
         Tab(
             selected = currentMode == GameMode.ANALYSIS,
             onClick = { onModeChange(GameMode.ANALYSIS) },
-            modifier = Modifier.semantics {
-                contentDescription = "Analysis mode tab"
-            }
+            modifier = Modifier
+                .height(60.dp)
+                .semantics {
+                    contentDescription = "Analysis mode tab"
+                }
         ) {
             Text(
                 text = "\uD83D\uDD0D ${stringResource(R.string.mode_analysis)}",
