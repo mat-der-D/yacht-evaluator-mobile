@@ -1,0 +1,33 @@
+sandbox/
+
+# Android/Gradle
+*.iml
+.gradle/
+local.properties
+.idea/
+*.hprof
+
+# Build outputs
+build/
+app/build/
+app/release/
+
+# Generated files
+.cxx/
+captures/
+
+# Keystore
+*.jks
+*.keystore
+
+# Log files
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
