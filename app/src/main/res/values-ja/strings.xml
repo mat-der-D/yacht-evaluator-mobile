@@ -48,4 +48,9 @@
     <!-- Errors -->
     <string name="error_evaluation_failed">評価に失敗しました。もう一度お試しください。</string>
     <string name="error_network">ネットワークエラー。接続を確認してください。</string>
+
+    <!-- Reset confirmation -->
+    <string name="reset_confirmation_title">ゲームをリセット</string>
+    <string name="reset_confirmation_message">本当にリセットしますか？すべての進行状況が失われます。</string>
+    <string name="cancel">キャンセル</string>
 </resources>

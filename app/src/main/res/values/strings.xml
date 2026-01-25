@@ -48,4 +48,9 @@
     <!-- Errors -->
     <string name="error_evaluation_failed">Failed to evaluate. Please try again.</string>
     <string name="error_network">Network error. Check your connection.</string>
+
+    <!-- Reset confirmation -->
+    <string name="reset_confirmation_title">Reset Game</string>
+    <string name="reset_confirmation_message">Are you sure you want to reset the game? All progress will be lost.</string>
+    <string name="cancel">Cancel</string>
 </resources>
