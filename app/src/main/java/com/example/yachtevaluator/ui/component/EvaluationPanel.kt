@@ -1,6 +1,5 @@
 package com.example.yachtevaluator.ui.component
 
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
@@ -52,8 +50,7 @@ fun EvaluationPanel(
     if (evaluationState is EvaluationUiState.Idle) return
 
     val sheetState = rememberModalBottomSheetState(
-        skipPartiallyExpanded = true,
-        confirmValueChange = { true }
+        skipPartiallyExpanded = true
     )
 
     ModalBottomSheet(
@@ -66,7 +63,7 @@ fun EvaluationPanel(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 48.dp, bottom = 16.dp)
         ) {
             // Header
             Row(
@@ -122,12 +119,9 @@ fun EvaluationPanel(
                     )
 
                     val bestEV = evaluationState.recommendations.maxOfOrNull { it.expectedValue } ?: 0.0
-                    val listState = rememberLazyListState()
 
                     LazyColumn(
-                        state = listState,
-                        verticalArrangement = Arrangement.spacedBy(4.dp),
-                        userScrollEnabled = true
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         items(evaluationState.recommendations) { recommendation ->
                             RecommendationItem(
