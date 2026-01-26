@@ -32,3 +32,6 @@ keystore.properties
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Claude files
+CLAUDE.md
