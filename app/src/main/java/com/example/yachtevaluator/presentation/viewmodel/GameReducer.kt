@@ -114,8 +114,15 @@ object GameReducer {
     private fun applyRecommendation(state: GameState, recommendation: Recommendation): GameState {
         return when (recommendation) {
             is Recommendation.Dice -> {
-                val diceToHoldSet = recommendation.diceToHold.toSet()
-                val newLockedDice = state.dice.map { die -> die in diceToHoldSet }
+                val newLockedDice = MutableList(5) { false }
+                for (faceToLock in recommendation.diceToHold) {
+                    for (i in state.dice.indices) {
+                        if (state.dice[i] == faceToLock && !newLockedDice[i]) {
+                            newLockedDice[i] = true
+                            break
+                        }
+                    }
+                }
                 state.copy(lockedDice = newLockedDice)
             }
             is Recommendation.CategoryChoice -> {
