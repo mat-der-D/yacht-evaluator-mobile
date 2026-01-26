@@ -1,6 +1,7 @@
 package com.example.yachtevaluator.data.repository
 
 import com.example.yachtevaluator.data.api.EvaluationApi
+import com.example.yachtevaluator.data.error.ErrorHandler
 import com.example.yachtevaluator.domain.model.Category
 import com.example.yachtevaluator.domain.model.RollCount
 import com.example.yachtevaluator.domain.model.ScoreSheet
@@ -19,7 +20,8 @@ interface EvaluationRepository {
 }
 
 class EvaluationRepositoryImpl @Inject constructor(
-    private val api: EvaluationApi
+    private val api: EvaluationApi,
+    private val errorHandler: ErrorHandler
 ) : EvaluationRepository {
 
     override suspend fun evaluate(
@@ -82,7 +84,8 @@ class EvaluationRepositoryImpl @Inject constructor(
 
             Result.success(recommendations)
         } catch (e: Exception) {
-            Result.failure(e)
+            val errorMessage = errorHandler.getErrorMessage(e)
+            Result.failure(Exception(errorMessage))
         }
     }
 }

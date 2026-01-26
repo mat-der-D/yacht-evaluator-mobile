@@ -1,10 +1,13 @@
 package com.example.yachtevaluator.di
 
+import android.content.Context
 import com.example.yachtevaluator.data.api.EvaluationApi
+import com.example.yachtevaluator.data.error.ErrorHandler
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -55,5 +58,11 @@ object AppModule {
     @Singleton
     fun provideEvaluationApi(retrofit: Retrofit): EvaluationApi {
         return retrofit.create(EvaluationApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideErrorHandler(@ApplicationContext context: Context): ErrorHandler {
+        return ErrorHandler(context)
     }
 }

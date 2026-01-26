@@ -58,6 +58,10 @@
     <!-- Errors -->
     <string name="error_evaluation_failed">評価に失敗しました。もう一度お試しください。</string>
     <string name="error_network">ネットワークエラー。接続を確認してください。</string>
+    <string name="error_server">サーバーでエラーが発生しました。しばらく待ってから再度お試しください。</string>
+    <string name="error_bad_request">リクエストが無効です。ゲームをリセットしてください。</string>
+    <string name="error_timeout">通信がタイムアウトしました。もう一度お試しください。</string>
+    <string name="error_unknown">予期しないエラーが発生しました。</string>
 
     <!-- Reset confirmation -->
     <string name="reset_confirmation_title">ゲームをリセット</string>
