@@ -112,6 +112,7 @@ fun GameScreen(
                         ) {
                             RollButton(
                                 rollCount = gameState.rollCount,
+                                isGameComplete = gameState.scoreSheet.isComplete,
                                 onClick = { viewModel.onIntent(GameIntent.RollDice) }
                             )
                         }
@@ -119,6 +120,7 @@ fun GameScreen(
                     GameMode.ANALYSIS -> {
                         RollCountSelector(
                             selectedRollCount = gameState.rollCount,
+                            isGameComplete = gameState.scoreSheet.isComplete,
                             onRollCountSelected = { viewModel.onIntent(GameIntent.SetRollCount(it)) }
                         )
                     }
@@ -135,7 +137,7 @@ fun GameScreen(
                 ) {
                     Button(
                         onClick = { viewModel.onIntent(GameIntent.RequestEvaluation) },
-                        enabled = gameState.rollCount != RollCount.ZERO,
+                        enabled = gameState.rollCount != RollCount.ZERO && !gameState.scoreSheet.isComplete,
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.primary,
                             contentColor = MaterialTheme.colorScheme.onPrimary

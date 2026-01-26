@@ -20,11 +20,12 @@ import com.example.yachtevaluator.domain.model.RollCount
 @Composable
 fun RollButton(
     rollCount: RollCount,
+    isGameComplete: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val remainingRolls = rollCount.remaining()
-    val isEnabled = rollCount.canRoll()
+    val isEnabled = rollCount.canRoll() && !isGameComplete
 
     Button(
         onClick = onClick,

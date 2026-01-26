@@ -23,6 +23,7 @@ import com.example.yachtevaluator.domain.model.RollCount
 @Composable
 fun RollCountSelector(
     selectedRollCount: RollCount,
+    isGameComplete: Boolean,
     onRollCountSelected: (RollCount) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -40,7 +41,8 @@ fun RollCountSelector(
                 modifier = Modifier
                     .selectable(
                         selected = selectedRollCount == rollCount,
-                        onClick = { onRollCountSelected(rollCount) },
+                        onClick = { if (!isGameComplete) onRollCountSelected(rollCount) },
+                        enabled = !isGameComplete,
                         role = Role.RadioButton
                     )
                     .semantics {
@@ -51,6 +53,7 @@ fun RollCountSelector(
                 RadioButton(
                     selected = selectedRollCount == rollCount,
                     onClick = null,
+                    enabled = !isGameComplete,
                     colors = RadioButtonDefaults.colors(
                         selectedColor = MaterialTheme.colorScheme.primary,
                         unselectedColor = MaterialTheme.colorScheme.outline
