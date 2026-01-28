@@ -6,7 +6,7 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Moshi
--keep class com.example.yachtevaluator.data.dto.** { *; }
+-keep class net.smoothpudding.yachtevaluator.data.dto.** { *; }
 
 # Retrofit
 -keepattributes Signature

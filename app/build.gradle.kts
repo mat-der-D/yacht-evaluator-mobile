@@ -17,11 +17,11 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.example.yachtevaluator"
+    namespace = "net.smoothpudding.yachtevaluator"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.yachtevaluator"
+        applicationId = "net.smoothpudding.yachtevaluator"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
