@@ -30,7 +30,7 @@ fun RollCountSelector(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(48.dp)
+            .height(40.dp)
             .selectableGroup()
             .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
