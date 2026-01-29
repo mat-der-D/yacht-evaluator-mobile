@@ -11,6 +11,12 @@
     <string name="dice_locked">ロック中</string>
     <string name="dice_unlocked">ロック解除</string>
 
+    <!-- Roll count -->
+    <string name="roll_count_0">0投目</string>
+    <string name="roll_count_1">1投目</string>
+    <string name="roll_count_2">2投目</string>
+    <string name="roll_count_3">3投目</string>
+
     <!-- Actions -->
     <string name="roll_dice">🎲を振る</string>
     <string name="rolls_remaining">残り%1$d回</string>

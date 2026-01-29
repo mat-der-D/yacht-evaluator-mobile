@@ -11,6 +11,12 @@
     <string name="dice_locked">Locked</string>
     <string name="dice_unlocked">Unlocked</string>
 
+    <!-- Roll count -->
+    <string name="roll_count_0">0th</string>
+    <string name="roll_count_1">1st</string>
+    <string name="roll_count_2">2nd</string>
+    <string name="roll_count_3">3rd</string>
+
     <!-- Actions -->
     <string name="roll_dice">Roll 🎲s</string>
     <string name="rolls_remaining">%1$d rolls remaining</string>
