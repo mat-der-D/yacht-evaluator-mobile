@@ -54,7 +54,7 @@ import net.smoothpudding.yachtevaluator.ui.component.ScoreTable
 import net.smoothpudding.yachtevaluator.ui.theme.LocalModeColors
 import net.smoothpudding.yachtevaluator.ui.theme.YachtEvaluatorTheme
 
-private val LowerRegionHeight = 192.dp
+private val LowerRegionHeight = 180.dp
 
 @Composable
 fun GameScreen(
@@ -147,7 +147,7 @@ fun GameScreen(
                         .fillMaxWidth()
                         .background(MaterialTheme.colorScheme.background)
                         .padding(vertical = 8.dp, horizontal = 16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.Bottom)
                 ) {
                     // Action buttons
                     Row(
