@@ -71,7 +71,13 @@ fun GameScreen(
     YachtEvaluatorTheme(gameMode = gameState.mode) {
         Scaffold(
             snackbarHost = { SnackbarHost(snackbarHostState) },
-            containerColor = MaterialTheme.colorScheme.background
+            containerColor = MaterialTheme.colorScheme.background,
+            bottomBar = {
+                ModeTabs(
+                    currentMode = gameState.mode,
+                    onModeChange = { viewModel.onIntent(GameIntent.ChangeMode(it)) }
+                )
+            }
         ) { paddingValues ->
             Column(
                 modifier = Modifier
@@ -79,12 +85,6 @@ fun GameScreen(
                     .padding(paddingValues)
                     .verticalScroll(rememberScrollState())
             ) {
-                // Mode tabs
-                ModeTabs(
-                    currentMode = gameState.mode,
-                    onModeChange = { viewModel.onIntent(GameIntent.ChangeMode(it)) }
-                )
-
                 Spacer(modifier = Modifier.height(24.dp))
 
                 // Dice section
