@@ -1,6 +1,7 @@
 package net.smoothpudding.yachtevaluator.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -8,11 +9,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
@@ -50,6 +53,8 @@ import net.smoothpudding.yachtevaluator.ui.component.RollCountSelector
 import net.smoothpudding.yachtevaluator.ui.component.ScoreTable
 import net.smoothpudding.yachtevaluator.ui.theme.YachtEvaluatorTheme
 
+private val LowerRegionHeight = 192.dp
+
 @Composable
 fun GameScreen(
     viewModel: GameViewModel = hiltViewModel()
@@ -79,131 +84,148 @@ fun GameScreen(
                 )
             }
         ) { paddingValues ->
-            Column(
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .verticalScroll(rememberScrollState())
             ) {
-                Spacer(modifier = Modifier.height(24.dp))
-
-                // Dice section
-                DiceRow(
-                    dice = gameState.dice,
-                    lockedDice = gameState.lockedDice,
-                    gameMode = gameState.mode,
-                    rollCount = gameState.rollCount,
-                    onDiceClick = { index ->
-                        when (gameState.mode) {
-                            GameMode.PLAY -> viewModel.onIntent(GameIntent.ToggleDiceLock(index))
-                            GameMode.ANALYSIS -> viewModel.onIntent(GameIntent.IncrementDice(index))
+                // Upper scrollable region
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    // Score table
+                    ScoreTable(
+                        scoreSheet = gameState.scoreSheet,
+                        predictedScores = uiState.predictedScores,
+                        gameMode = gameState.mode,
+                        rollCount = gameState.rollCount,
+                        onConfirmScore = { category ->
+                            viewModel.onIntent(GameIntent.ConfirmScore(category))
+                        },
+                        onScoreClick = { category ->
+                            // In analysis mode, could open a score edit dialog
+                            // For now, this is a placeholder
+                        },
+                        onScoreUpdate = { category, value ->
+                            viewModel.onIntent(GameIntent.UpdateScore(category, value))
                         }
-                    }
+                    )
+
+                    // Version info
+                    Text(
+                        text = stringResource(R.string.version_format, BuildConfig.VERSION_NAME),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 16.dp),
+                        textAlign = TextAlign.Center
+                    )
+
+                    // Spacer to allow scrolling past lower region
+                    Spacer(modifier = Modifier.height(LowerRegionHeight))
+                }
+
+                // Gray divider
+                HorizontalDivider(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = LowerRegionHeight),
+                    thickness = 2.dp,
+                    color = MaterialTheme.colorScheme.outlineVariant
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
-
-                // Dice actions
-                when (gameState.mode) {
-                    GameMode.PLAY -> {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.Center
+                // Lower fixed region
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .height(LowerRegionHeight)
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.surface)
+                        .padding(vertical = 8.dp, horizontal = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    // Action buttons
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
+                    ) {
+                        Button(
+                            onClick = { viewModel.onIntent(GameIntent.RequestEvaluation) },
+                            enabled = gameState.rollCount != RollCount.ZERO && !gameState.scoreSheet.isComplete,
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = MaterialTheme.colorScheme.primary,
+                                contentColor = MaterialTheme.colorScheme.onPrimary
+                            ),
+                            modifier = Modifier.semantics {
+                                contentDescription = "Evaluate current game state"
+                            }
                         ) {
-                            RollButton(
-                                rollCount = gameState.rollCount,
-                                isGameComplete = gameState.scoreSheet.isComplete,
-                                onClick = { viewModel.onIntent(GameIntent.RollDice) }
+                            Text(
+                                text = "\uD83D\uDCCA ${stringResource(R.string.evaluate)}",
+                                style = MaterialTheme.typography.labelLarge
+                            )
+                        }
+
+                        OutlinedButton(
+                            onClick = { showResetDialog = true },
+                            modifier = Modifier.semantics {
+                                contentDescription = "Reset game"
+                            },
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                contentColor = MaterialTheme.colorScheme.primary
+                            ),
+                            border = androidx.compose.foundation.BorderStroke(
+                                1.dp,
+                                MaterialTheme.colorScheme.primary
+                            )
+                        ) {
+                            Text(
+                                text = stringResource(R.string.reset),
+                                style = MaterialTheme.typography.labelLarge
                             )
                         }
                     }
-                    GameMode.ANALYSIS -> {
-                        RollCountSelector(
-                            selectedRollCount = gameState.rollCount,
-                            isGameComplete = gameState.scoreSheet.isComplete,
-                            onRollCountSelected = { viewModel.onIntent(GameIntent.SetRollCount(it)) }
-                        )
-                    }
-                }
 
-                Spacer(modifier = Modifier.height(16.dp))
-
-                // Action buttons
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
-                ) {
-                    Button(
-                        onClick = { viewModel.onIntent(GameIntent.RequestEvaluation) },
-                        enabled = gameState.rollCount != RollCount.ZERO && !gameState.scoreSheet.isComplete,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primary,
-                            contentColor = MaterialTheme.colorScheme.onPrimary
-                        ),
-                        modifier = Modifier.semantics {
-                            contentDescription = "Evaluate current game state"
+                    // Dice actions
+                    when (gameState.mode) {
+                        GameMode.PLAY -> {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                RollButton(
+                                    rollCount = gameState.rollCount,
+                                    isGameComplete = gameState.scoreSheet.isComplete,
+                                    onClick = { viewModel.onIntent(GameIntent.RollDice) }
+                                )
+                            }
                         }
-                    ) {
-                        Text(
-                            text = "\uD83D\uDCCA ${stringResource(R.string.evaluate)}",
-                            style = MaterialTheme.typography.labelLarge
-                        )
+                        GameMode.ANALYSIS -> {
+                            RollCountSelector(
+                                selectedRollCount = gameState.rollCount,
+                                isGameComplete = gameState.scoreSheet.isComplete,
+                                onRollCountSelected = { viewModel.onIntent(GameIntent.SetRollCount(it)) }
+                            )
+                        }
                     }
 
-                    OutlinedButton(
-                        onClick = { showResetDialog = true },
-                        modifier = Modifier.semantics {
-                            contentDescription = "Reset game"
-                        },
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = MaterialTheme.colorScheme.primary
-                        ),
-                        border = androidx.compose.foundation.BorderStroke(
-                            1.dp,
-                            MaterialTheme.colorScheme.primary
-                        )
-                    ) {
-                        Text(
-                            text = stringResource(R.string.reset),
-                            style = MaterialTheme.typography.labelLarge
-                        )
-                    }
+                    // Dice section
+                    DiceRow(
+                        dice = gameState.dice,
+                        lockedDice = gameState.lockedDice,
+                        gameMode = gameState.mode,
+                        rollCount = gameState.rollCount,
+                        onDiceClick = { index ->
+                            when (gameState.mode) {
+                                GameMode.PLAY -> viewModel.onIntent(GameIntent.ToggleDiceLock(index))
+                                GameMode.ANALYSIS -> viewModel.onIntent(GameIntent.IncrementDice(index))
+                            }
+                        }
+                    )
                 }
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                // Score table
-                ScoreTable(
-                    scoreSheet = gameState.scoreSheet,
-                    predictedScores = uiState.predictedScores,
-                    gameMode = gameState.mode,
-                    rollCount = gameState.rollCount,
-                    onConfirmScore = { category ->
-                        viewModel.onIntent(GameIntent.ConfirmScore(category))
-                    },
-                    onScoreClick = { category ->
-                        // In analysis mode, could open a score edit dialog
-                        // For now, this is a placeholder
-                    },
-                    onScoreUpdate = { category, value ->
-                        viewModel.onIntent(GameIntent.UpdateScore(category, value))
-                    }
-                )
-
-                // Version info
-                Text(
-                    text = stringResource(R.string.version_format, BuildConfig.VERSION_NAME),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 16.dp),
-                    textAlign = TextAlign.Center
-                )
             }
 
             // Evaluation panel (bottom sheet)
