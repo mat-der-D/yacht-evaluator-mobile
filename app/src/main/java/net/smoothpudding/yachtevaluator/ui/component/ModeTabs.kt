@@ -1,12 +1,13 @@
 package net.smoothpudding.yachtevaluator.ui.component
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -25,64 +26,66 @@ fun ModeTabs(
     onModeChange: (GameMode) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val selectedIndex = when (currentMode) {
-        GameMode.PLAY -> 0
-        GameMode.ANALYSIS -> 1
-    }
-
-    TabRow(
-        selectedTabIndex = selectedIndex,
+    NavigationBar(
         modifier = modifier
-            .fillMaxWidth()
-            .height(60.dp),
+            .windowInsetsPadding(WindowInsets.navigationBars)
+            .height(64.dp),
         containerColor = MaterialTheme.colorScheme.surface,
-        contentColor = MaterialTheme.colorScheme.primary,
-        indicator = { tabPositions ->
-            TabRowDefaults.SecondaryIndicator(
-                modifier = Modifier.tabIndicatorOffset(tabPositions[selectedIndex]),
-                color = when (currentMode) {
-                    GameMode.PLAY -> PlayPrimary
-                    GameMode.ANALYSIS -> AnalysisPrimary
-                }
-            )
-        }
+        contentColor = MaterialTheme.colorScheme.onSurface,
+        windowInsets = WindowInsets(0, 0, 0, 0)
     ) {
-        Tab(
+        NavigationBarItem(
             selected = currentMode == GameMode.PLAY,
             onClick = { onModeChange(GameMode.PLAY) },
-            modifier = Modifier
-                .height(60.dp)
-                .semantics {
-                    contentDescription = "Play mode tab"
-                }
-        ) {
-            Text(
-                text = "\uD83C\uDFB2 ${stringResource(R.string.mode_play)}",
-                style = MaterialTheme.typography.titleMedium,
-                color = if (currentMode == GameMode.PLAY) PlayPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.semantics {
-                    contentDescription = "Play mode"
-                }
-            )
-        }
+            icon = {
+                Text(
+                    text = "\uD83C\uDFB2",
+                    style = MaterialTheme.typography.titleLarge
+                )
+            },
+            label = {
+                Text(
+                    text = stringResource(R.string.mode_play),
+                    style = MaterialTheme.typography.labelMedium
+                )
+            },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = PlayPrimary,
+                selectedTextColor = PlayPrimary,
+                unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                indicatorColor = PlayPrimary.copy(alpha = 0.12f)
+            ),
+            modifier = Modifier.semantics {
+                contentDescription = "Play mode tab"
+            }
+        )
 
-        Tab(
+        NavigationBarItem(
             selected = currentMode == GameMode.ANALYSIS,
             onClick = { onModeChange(GameMode.ANALYSIS) },
-            modifier = Modifier
-                .height(60.dp)
-                .semantics {
-                    contentDescription = "Analysis mode tab"
-                }
-        ) {
-            Text(
-                text = "\uD83D\uDD0D ${stringResource(R.string.mode_analysis)}",
-                style = MaterialTheme.typography.titleMedium,
-                color = if (currentMode == GameMode.ANALYSIS) AnalysisPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.semantics {
-                    contentDescription = "Analysis mode"
-                }
-            )
-        }
+            icon = {
+                Text(
+                    text = "\uD83D\uDD0D",
+                    style = MaterialTheme.typography.titleLarge
+                )
+            },
+            label = {
+                Text(
+                    text = stringResource(R.string.mode_analysis),
+                    style = MaterialTheme.typography.labelMedium
+                )
+            },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = AnalysisPrimary,
+                selectedTextColor = AnalysisPrimary,
+                unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                indicatorColor = AnalysisPrimary.copy(alpha = 0.12f)
+            ),
+            modifier = Modifier.semantics {
+                contentDescription = "Analysis mode tab"
+            }
+        )
     }
 }

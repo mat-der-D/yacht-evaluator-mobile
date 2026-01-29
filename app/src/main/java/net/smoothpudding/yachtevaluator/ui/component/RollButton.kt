@@ -31,7 +31,7 @@ fun RollButton(
         onClick = onClick,
         enabled = isEnabled,
         modifier = modifier
-            .height(48.dp)
+            .height(40.dp)
             .semantics {
                 contentDescription = "Roll dice, $remainingRolls rolls remaining"
             },
@@ -39,7 +39,7 @@ fun RollButton(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary
         ),
-        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp)
+        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 8.dp)
     ) {
         Text(
             text = stringResource(R.string.roll_dice),
