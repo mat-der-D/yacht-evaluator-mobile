@@ -51,6 +51,7 @@ import net.smoothpudding.yachtevaluator.ui.component.ModeTabs
 import net.smoothpudding.yachtevaluator.ui.component.RollButton
 import net.smoothpudding.yachtevaluator.ui.component.RollCountSelector
 import net.smoothpudding.yachtevaluator.ui.component.ScoreTable
+import net.smoothpudding.yachtevaluator.ui.theme.LocalModeColors
 import net.smoothpudding.yachtevaluator.ui.theme.YachtEvaluatorTheme
 
 private val LowerRegionHeight = 192.dp
@@ -74,6 +75,7 @@ fun GameScreen(
     }
 
     YachtEvaluatorTheme(gameMode = gameState.mode) {
+        val modeColors = LocalModeColors.current
         Scaffold(
             snackbarHost = { SnackbarHost(snackbarHostState) },
             containerColor = MaterialTheme.colorScheme.background,
@@ -143,7 +145,7 @@ fun GameScreen(
                         .align(Alignment.BottomCenter)
                         .height(LowerRegionHeight)
                         .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.surface)
+                        .background(MaterialTheme.colorScheme.background)
                         .padding(vertical = 8.dp, horizontal = 16.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
