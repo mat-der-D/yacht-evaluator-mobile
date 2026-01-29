@@ -92,7 +92,7 @@ fun ScoreRow(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(48.dp)
+                    .height(38.dp)
                     .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -111,7 +111,7 @@ fun ScoreRow(
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 8.dp)
-                        .height(40.dp)
+                        .height(32.dp)
                         .border(
                             1.dp,
                             if (validationError.isNotEmpty()) MaterialTheme.colorScheme.error else Color.Gray,
@@ -143,7 +143,7 @@ fun ScoreRow(
                                 contentColor = MaterialTheme.colorScheme.onPrimary
                             ),
                             contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 12.dp),
-                            modifier = Modifier.height(32.dp)
+                            modifier = Modifier.height(28.dp)
                         ) {
                             Text(
                                 text = "✓",
@@ -169,7 +169,7 @@ fun ScoreRow(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .height(48.dp)
+                .height(38.dp)
                 .background(backgroundColor)
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -232,7 +232,7 @@ fun ScoreRow(
                             contentColor = MaterialTheme.colorScheme.onPrimary
                         ),
                         contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 12.dp),
-                        modifier = Modifier.height(32.dp)
+                        modifier = Modifier.height(28.dp)
                     ) {
                         Text(
                             text = "✓",
@@ -255,7 +255,7 @@ fun TotalRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(48.dp)
+            .height(38.dp)
             .background(ConfirmedScoreBackground)
             .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
