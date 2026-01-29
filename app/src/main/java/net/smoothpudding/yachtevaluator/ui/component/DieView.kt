@@ -87,21 +87,21 @@ private fun DiceDots(value: Int) {
             2 -> {
                 Column {
                     Row {
-                        Spacer(modifier = Modifier.weight(1f))
                         Dot(modifier = Modifier.size(dotSize))
+                        Spacer(modifier = Modifier.weight(1f))
                     }
                     Spacer(modifier = Modifier.weight(1f))
                     Row {
-                        Dot(modifier = Modifier.size(dotSize))
                         Spacer(modifier = Modifier.weight(1f))
+                        Dot(modifier = Modifier.size(dotSize))
                     }
                 }
             }
             3 -> {
                 Column {
                     Row {
-                        Spacer(modifier = Modifier.weight(1f))
                         Dot(modifier = Modifier.size(dotSize))
+                        Spacer(modifier = Modifier.weight(1f))
                     }
                     Spacer(modifier = Modifier.weight(1f))
                     Row(
@@ -111,8 +111,8 @@ private fun DiceDots(value: Int) {
                     }
                     Spacer(modifier = Modifier.weight(1f))
                     Row {
-                        Dot(modifier = Modifier.size(dotSize))
                         Spacer(modifier = Modifier.weight(1f))
+                        Dot(modifier = Modifier.size(dotSize))
                     }
                 }
             }
