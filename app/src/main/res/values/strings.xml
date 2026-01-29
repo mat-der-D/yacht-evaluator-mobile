@@ -67,4 +67,7 @@
     <string name="reset_confirmation_title">Reset Game</string>
     <string name="reset_confirmation_message">Are you sure you want to reset the game? All progress will be lost.</string>
     <string name="cancel">Cancel</string>
+
+    <!-- App info -->
+    <string name="version_format">v %1$s</string>
 </resources>

@@ -67,4 +67,7 @@
     <string name="reset_confirmation_title">ゲームをリセット</string>
     <string name="reset_confirmation_message">本当にリセットしますか？すべての進行状況が失われます。</string>
     <string name="cancel">キャンセル</string>
+
+    <!-- App info -->
+    <string name="version_format">v %1$s</string>
 </resources>
