@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import net.smoothpudding.yachtevaluator.R
@@ -40,6 +41,7 @@ import net.smoothpudding.yachtevaluator.domain.model.RollCount
 import net.smoothpudding.yachtevaluator.presentation.intent.GameIntent
 import net.smoothpudding.yachtevaluator.presentation.state.EvaluationUiState
 import net.smoothpudding.yachtevaluator.presentation.viewmodel.GameViewModel
+import net.smoothpudding.yachtevaluator.BuildConfig
 import net.smoothpudding.yachtevaluator.ui.component.DiceRow
 import net.smoothpudding.yachtevaluator.ui.component.EvaluationPanel
 import net.smoothpudding.yachtevaluator.ui.component.ModeTabs
@@ -192,7 +194,16 @@ fun GameScreen(
                     }
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                // Version info
+                Text(
+                    text = stringResource(R.string.version_format, BuildConfig.VERSION_NAME),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp),
+                    textAlign = TextAlign.Center
+                )
             }
 
             // Evaluation panel (bottom sheet)
