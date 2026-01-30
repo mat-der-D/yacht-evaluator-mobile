@@ -173,6 +173,8 @@ private fun RecommendationItem(
     else
         stringResource(R.string.best_minus_format, diff)
 
+    HorizontalDivider(color = Outline.copy(alpha = 1.0f), thickness = 1.5.dp)
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -254,6 +256,4 @@ private fun RecommendationItem(
             }
         }
     }
-
-    HorizontalDivider(color = Outline.copy(alpha = 0.3f), thickness = 1.dp)
 }
