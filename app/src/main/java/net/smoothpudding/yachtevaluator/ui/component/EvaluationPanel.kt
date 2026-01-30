@@ -4,8 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
@@ -95,7 +94,7 @@ fun EvaluationPanel(
     val animatedHeightFraction by animateFloatAsState(
         targetValue = heightFraction,
         animationSpec = spring(
-            dampingRatio = Spring.DampingRatioMediumBouncy,
+            dampingRatio = Spring.DampingRatioNoBouncy,
             stiffness = Spring.StiffnessMedium
         ),
         label = "Panel Height Animation"
@@ -105,18 +104,12 @@ fun EvaluationPanel(
         visible = evaluationState !is EvaluationUiState.Idle,
         enter = slideInVertically(
             initialOffsetY = { it },
-            animationSpec = spring(
-                dampingRatio = Spring.DampingRatioMediumBouncy,
-                stiffness = Spring.StiffnessMedium
-            )
-        ) + fadeIn(),
+            animationSpec = tween(durationMillis = 300)
+        ),
         exit = slideOutVertically(
             targetOffsetY = { it },
-            animationSpec = spring(
-                dampingRatio = Spring.DampingRatioNoBouncy,
-                stiffness = Spring.StiffnessMedium
-            )
-        ) + fadeOut(),
+            animationSpec = tween(durationMillis = 250)
+        ),
         modifier = modifier
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
