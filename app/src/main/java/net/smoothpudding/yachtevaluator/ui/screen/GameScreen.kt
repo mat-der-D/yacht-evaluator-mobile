@@ -107,6 +107,16 @@ fun GameScreen(
                     Box(
                         modifier = Modifier.fillMaxSize()
                     ) {
+                        when (gameState.mode) {
+                            GameMode.SETTINGS -> {
+                                // Settings screen - empty white page
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .background(MaterialTheme.colorScheme.background)
+                                )
+                            }
+                            GameMode.PLAY, GameMode.ANALYSIS -> {
                         // Upper scrollable region
                         Column(
                             modifier = Modifier
@@ -229,6 +239,9 @@ fun GameScreen(
                                     onRollCountSelected = { viewModel.onIntent(GameIntent.SetRollCount(it)) }
                                 )
                             }
+                            GameMode.SETTINGS -> {
+                                // No dice actions in settings mode
+                            }
                         }
 
                         // Dice section
@@ -241,10 +254,13 @@ fun GameScreen(
                                 when (gameState.mode) {
                                     GameMode.PLAY -> viewModel.onIntent(GameIntent.ToggleDiceLock(index))
                                     GameMode.ANALYSIS -> viewModel.onIntent(GameIntent.IncrementDice(index))
+                                    GameMode.SETTINGS -> {} // No dice interaction in settings mode
                                 }
                             }
                         )
                     }
+                            }
+                        }
                     }
                 }
 

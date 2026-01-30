@@ -31,6 +31,14 @@ val AnalysisModeColors = ModeColors(
     background = AnalysisBackground
 )
 
+val SettingsModeColors = ModeColors(
+    primary = SettingsPrimary,
+    primaryContainer = SettingsPrimaryContainer,
+    onPrimary = SettingsOnPrimary,
+    secondary = SettingsSecondary,
+    background = SettingsBackground
+)
+
 val LocalModeColors = staticCompositionLocalOf { PlayModeColors }
 
 private val LightColorScheme = lightColorScheme(
@@ -54,6 +62,7 @@ fun YachtEvaluatorTheme(
     val modeColors = when (gameMode) {
         GameMode.PLAY -> PlayModeColors
         GameMode.ANALYSIS -> AnalysisModeColors
+        GameMode.SETTINGS -> SettingsModeColors
     }
 
     val colorScheme = LightColorScheme.copy(

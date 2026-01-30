@@ -16,6 +16,13 @@ val AnalysisOnPrimary = Color.White
 val AnalysisSecondary = Color(0xFFFB923C)
 val AnalysisBackground = Color(0xFFFFF4ED)  // Very light orange
 
+// Settings mode colors (Gray)
+val SettingsPrimary = Color(0xFF6B7280)
+val SettingsPrimaryContainer = Color(0xFFE5E7EB)
+val SettingsOnPrimary = Color.White
+val SettingsSecondary = Color(0xFF9CA3AF)
+val SettingsBackground = Color(0xFFF9FAFB)  // Very light gray
+
 // Common colors
 val Background = Color(0xFFFAFAFA)
 val Surface = Color.White

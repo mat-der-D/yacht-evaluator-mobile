@@ -19,6 +19,7 @@ import net.smoothpudding.yachtevaluator.R
 import net.smoothpudding.yachtevaluator.domain.model.GameMode
 import net.smoothpudding.yachtevaluator.ui.theme.AnalysisPrimary
 import net.smoothpudding.yachtevaluator.ui.theme.PlayPrimary
+import net.smoothpudding.yachtevaluator.ui.theme.SettingsPrimary
 
 @Composable
 fun ModeTabs(
@@ -85,6 +86,33 @@ fun ModeTabs(
             ),
             modifier = Modifier.semantics {
                 contentDescription = "Analysis mode tab"
+            }
+        )
+
+        NavigationBarItem(
+            selected = currentMode == GameMode.SETTINGS,
+            onClick = { onModeChange(GameMode.SETTINGS) },
+            icon = {
+                Text(
+                    text = "⚙️",
+                    style = MaterialTheme.typography.titleLarge
+                )
+            },
+            label = {
+                Text(
+                    text = stringResource(R.string.mode_settings),
+                    style = MaterialTheme.typography.labelMedium
+                )
+            },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = SettingsPrimary,
+                selectedTextColor = SettingsPrimary,
+                unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                indicatorColor = SettingsPrimary.copy(alpha = 0.12f)
+            ),
+            modifier = Modifier.semantics {
+                contentDescription = "Settings mode tab"
             }
         )
     }

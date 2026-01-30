@@ -6,6 +6,7 @@
     <!-- Mode tabs -->
     <string name="mode_play">Play</string>
     <string name="mode_analysis">Analysis</string>
+    <string name="mode_settings">Settings</string>
 
     <!-- Dice -->
     <string name="dice_description">Dice %1$d showing %2$d</string>

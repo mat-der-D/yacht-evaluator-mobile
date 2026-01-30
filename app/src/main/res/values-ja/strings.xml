@@ -6,6 +6,7 @@
     <!-- Mode tabs -->
     <string name="mode_play">遊ぶ</string>
     <string name="mode_analysis">分析する</string>
+    <string name="mode_settings">設定</string>
 
     <!-- Dice -->
     <string name="dice_description">ダイス%1$dは%2$dを表示</string>

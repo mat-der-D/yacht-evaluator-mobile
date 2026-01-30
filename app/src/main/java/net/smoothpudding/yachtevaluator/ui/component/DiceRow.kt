@@ -36,6 +36,7 @@ fun DiceRow(
                 enabled = when (gameMode) {
                     GameMode.PLAY -> rollCount != RollCount.ZERO
                     GameMode.ANALYSIS -> true
+                    GameMode.SETTINGS -> false
                 },
                 gameMode = gameMode,
                 modifier = Modifier.width(56.dp)
