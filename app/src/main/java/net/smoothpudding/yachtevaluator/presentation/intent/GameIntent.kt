@@ -18,5 +18,5 @@ sealed interface GameIntent {
     data object RequestEvaluation : GameIntent
     data class ApplyRecommendation(val recommendation: Recommendation) : GameIntent
     data object DismissEvaluation : GameIntent
-    data class SetCompactMode(val enabled: Boolean) : GameIntent
+    data class SetAdaptiveDisplay(val enabled: Boolean) : GameIntent
 }

@@ -25,7 +25,7 @@ object GameReducer {
             // These intents don't modify GameState directly
             is GameIntent.RequestEvaluation,
             is GameIntent.DismissEvaluation,
-            is GameIntent.SetCompactMode -> state
+            is GameIntent.SetAdaptiveDisplay -> state
         }
     }
 

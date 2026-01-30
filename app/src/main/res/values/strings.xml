@@ -81,6 +81,6 @@
     <string name="version_format">v %1$s</string>
 
     <!-- Settings -->
-    <string name="settings_compact_mode">Compact Display</string>
-    <string name="settings_compact_mode_description">Fit score table to screen height</string>
+    <string name="settings_adaptive_display">Auto-fit Display</string>
+    <string name="settings_adaptive_display_description">Adjust score row height based on screen size</string>
 </resources>

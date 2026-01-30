@@ -27,8 +27,8 @@ fun ScoreTable(
     onScoreClick: (Category) -> Unit,
     onScoreUpdate: (Category, Int?) -> Unit = { _, _ -> },
     modifier: Modifier = Modifier,
-    isCompactMode: Boolean = false,
-    compactRowHeight: Dp? = null
+    isAdaptiveDisplay: Boolean = false,
+    adaptiveRowHeight: Dp? = null
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         // Upper section
@@ -43,8 +43,8 @@ fun ScoreTable(
                 onConfirm = { onConfirmScore(category) },
                 onScoreClick = { onScoreClick(category) },
                 onScoreUpdate = { value -> onScoreUpdate(category, value) },
-                isCompactMode = isCompactMode,
-                compactRowHeight = compactRowHeight
+                isAdaptiveDisplay = isAdaptiveDisplay,
+                adaptiveRowHeight = adaptiveRowHeight
             )
             HorizontalDivider(color = Outline, thickness = 1.dp)
         }
@@ -53,8 +53,8 @@ fun ScoreTable(
         TotalRow(
             label = stringResource(R.string.upper_total),
             score = scoreSheet.upperTotal,
-            isCompactMode = isCompactMode,
-            compactRowHeight = compactRowHeight
+            isAdaptiveDisplay = isAdaptiveDisplay,
+            adaptiveRowHeight = adaptiveRowHeight
         )
         HorizontalDivider(color = Outline, thickness = 1.dp)
 
@@ -63,8 +63,8 @@ fun ScoreTable(
             label = stringResource(R.string.bonus),
             score = scoreSheet.bonus,
             isBonus = true,
-            isCompactMode = isCompactMode,
-            compactRowHeight = compactRowHeight
+            isAdaptiveDisplay = isAdaptiveDisplay,
+            adaptiveRowHeight = adaptiveRowHeight
         )
         HorizontalDivider(color = MaterialTheme.colorScheme.outline, thickness = 2.dp)
 
@@ -80,8 +80,8 @@ fun ScoreTable(
                 onConfirm = { onConfirmScore(category) },
                 onScoreClick = { onScoreClick(category) },
                 onScoreUpdate = { value -> onScoreUpdate(category, value) },
-                isCompactMode = isCompactMode,
-                compactRowHeight = compactRowHeight
+                isAdaptiveDisplay = isAdaptiveDisplay,
+                adaptiveRowHeight = adaptiveRowHeight
             )
             HorizontalDivider(color = Outline, thickness = 1.dp)
         }
@@ -90,8 +90,8 @@ fun ScoreTable(
         TotalRow(
             label = stringResource(R.string.total),
             score = scoreSheet.finalTotal,
-            isCompactMode = isCompactMode,
-            compactRowHeight = compactRowHeight
+            isAdaptiveDisplay = isAdaptiveDisplay,
+            adaptiveRowHeight = adaptiveRowHeight
         )
     }
 }

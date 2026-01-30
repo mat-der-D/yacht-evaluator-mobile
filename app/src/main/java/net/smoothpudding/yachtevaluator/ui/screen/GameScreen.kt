@@ -139,20 +139,20 @@ fun GameScreen(
                                     ) {
                                         Column(modifier = Modifier.weight(1f)) {
                                             Text(
-                                                text = stringResource(R.string.settings_compact_mode),
+                                                text = stringResource(R.string.settings_adaptive_display),
                                                 style = MaterialTheme.typography.bodyLarge,
                                                 color = MaterialTheme.colorScheme.onSurface
                                             )
                                             Text(
-                                                text = stringResource(R.string.settings_compact_mode_description),
+                                                text = stringResource(R.string.settings_adaptive_display_description),
                                                 style = MaterialTheme.typography.bodySmall,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                                             )
                                         }
                                         Switch(
-                                            checked = uiState.isCompactMode,
+                                            checked = uiState.isAdaptiveDisplay,
                                             onCheckedChange = { enabled ->
-                                                viewModel.onIntent(GameIntent.SetCompactMode(enabled))
+                                                viewModel.onIntent(GameIntent.SetAdaptiveDisplay(enabled))
                                             }
                                         )
                                     }
@@ -179,9 +179,9 @@ fun GameScreen(
                                 }
                             }
                             GameMode.PLAY, GameMode.ANALYSIS -> {
-                        // Calculate compact row height dynamically
+                        // Calculate adaptive row height dynamically
                         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
-                            val compactRowHeight: Dp? = if (uiState.isCompactMode) {
+                            val adaptiveRowHeight: Dp? = if (uiState.isAdaptiveDisplay) {
                                 val availableHeightForTable = maxHeight - LowerRegionHeight - DividerTotalHeight
                                 availableHeightForTable / SCORE_TABLE_ROW_COUNT
                             } else null
@@ -209,8 +209,8 @@ fun GameScreen(
                             onScoreUpdate = { category, value ->
                                 viewModel.onIntent(GameIntent.UpdateScore(category, value))
                             },
-                            isCompactMode = uiState.isCompactMode,
-                            compactRowHeight = compactRowHeight
+                            isAdaptiveDisplay = uiState.isAdaptiveDisplay,
+                            adaptiveRowHeight = adaptiveRowHeight
                         )
 
                             // Spacer to allow scrolling past lower region

@@ -8,5 +8,5 @@ data class GameUiState(
     val predictedScores: Map<Category, Int> = emptyMap(),
     val evaluationState: EvaluationUiState = EvaluationUiState.Idle,
     val refreshTrigger: Long = 0L,
-    val isCompactMode: Boolean = false
+    val isAdaptiveDisplay: Boolean = false
 )

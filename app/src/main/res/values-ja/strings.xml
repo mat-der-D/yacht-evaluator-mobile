@@ -81,6 +81,6 @@
     <string name="version_format">v %1$s</string>
 
     <!-- Settings -->
-    <string name="settings_compact_mode">コンパクト表示</string>
-    <string name="settings_compact_mode_description">スコア表を画面の高さに収める</string>
+    <string name="settings_adaptive_display">画面適応表示</string>
+    <string name="settings_adaptive_display_description">画面サイズに応じてスコア行の高さを自動調整</string>
 </resources>

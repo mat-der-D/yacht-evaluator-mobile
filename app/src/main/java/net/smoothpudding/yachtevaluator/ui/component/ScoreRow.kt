@@ -55,20 +55,20 @@ fun ScoreRow(
     onScoreClick: () -> Unit,
     onScoreUpdate: (Int?) -> Unit = {},
     modifier: Modifier = Modifier,
-    isCompactMode: Boolean = false,
-    compactRowHeight: Dp? = null
+    isAdaptiveDisplay: Boolean = false,
+    adaptiveRowHeight: Dp? = null
 ) {
     val isConfirmed = confirmedScore != null
     val backgroundColor = MaterialTheme.colorScheme.surface
     val showConfirmButton = !isConfirmed && rollCount != RollCount.ZERO
     val isAnalysisMode = gameMode == GameMode.ANALYSIS
     val rowHeight = when {
-        compactRowHeight != null -> compactRowHeight
-        isCompactMode -> 28.dp
+        adaptiveRowHeight != null -> adaptiveRowHeight
+        isAdaptiveDisplay -> 28.dp
         else -> 38.dp
     }
-    val inputHeight = if (compactRowHeight != null) rowHeight * 0.857f else if (isCompactMode) 24.dp else 32.dp
-    val buttonHeight = if (compactRowHeight != null) rowHeight * 0.786f else if (isCompactMode) 22.dp else 28.dp
+    val inputHeight = if (adaptiveRowHeight != null) rowHeight * 0.857f else if (isAdaptiveDisplay) 24.dp else 32.dp
+    val buttonHeight = if (adaptiveRowHeight != null) rowHeight * 0.786f else if (isAdaptiveDisplay) 22.dp else 28.dp
 
     // Local state for text input in analysis mode
     var inputText by remember(confirmedScore, refreshTrigger) { mutableStateOf(confirmedScore?.toString() ?: "") }
@@ -262,12 +262,12 @@ fun TotalRow(
     score: Int,
     modifier: Modifier = Modifier,
     isBonus: Boolean = false,
-    isCompactMode: Boolean = false,
-    compactRowHeight: Dp? = null
+    isAdaptiveDisplay: Boolean = false,
+    adaptiveRowHeight: Dp? = null
 ) {
     val rowHeight = when {
-        compactRowHeight != null -> compactRowHeight
-        isCompactMode -> 28.dp
+        adaptiveRowHeight != null -> adaptiveRowHeight
+        isAdaptiveDisplay -> 28.dp
         else -> 38.dp
     }
 
