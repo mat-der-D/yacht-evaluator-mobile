@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
@@ -71,8 +72,8 @@ fun DieView(
 
 @Composable
 private fun DiceDots(value: Int) {
-    val dotSize = 8.dp
-    val spacing = 4.dp
+    val dotSize = 9.5.dp
+    val dotSizeOne = 12.dp
 
     Box(
         modifier = Modifier
@@ -82,7 +83,7 @@ private fun DiceDots(value: Int) {
     ) {
         when (value) {
             1 -> {
-                Dot(modifier = Modifier.size(dotSize))
+                Dot(modifier = Modifier.size(dotSizeOne), color = Color.Red)
             }
             2 -> {
                 Column {
@@ -178,10 +179,10 @@ private fun DiceDots(value: Int) {
 }
 
 @Composable
-private fun Dot(modifier: Modifier = Modifier) {
+private fun Dot(modifier: Modifier = Modifier, color: Color = DiceDot) {
     Box(
         modifier = modifier
             .clip(CircleShape)
-            .background(DiceDot)
+            .background(color)
     )
 }
