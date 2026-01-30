@@ -241,15 +241,15 @@ private fun RecommendationItem(
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = MaterialTheme.colorScheme.onPrimary
                 ),
-                contentPadding = androidx.compose.foundation.layout.PaddingValues(8.dp),
-                modifier = Modifier.size(56.dp)
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 12.dp),
+                modifier = Modifier.height(28.dp)
             ) {
                 Text(
                     text = when (recommendation) {
                         is Recommendation.Dice -> "🔒"
                         is Recommendation.CategoryChoice -> "✓"
                     },
-                    style = MaterialTheme.typography.headlineSmall
+                    style = MaterialTheme.typography.titleMedium
                 )
             }
         }
