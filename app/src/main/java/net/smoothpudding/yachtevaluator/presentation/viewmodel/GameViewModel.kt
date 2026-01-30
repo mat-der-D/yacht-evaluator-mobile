@@ -33,6 +33,9 @@ class GameViewModel @Inject constructor(
         when (intent) {
             is GameIntent.RequestEvaluation -> requestEvaluation()
             is GameIntent.DismissEvaluation -> dismissEvaluation()
+            is GameIntent.SetCompactMode -> {
+                _uiState.update { it.copy(isCompactMode = intent.enabled) }
+            }
             is GameIntent.ResetGame -> {
                 val newGameState = GameReducer.reduce(_uiState.value.gameState, intent)
                 _uiState.update {

@@ -24,6 +24,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -109,17 +110,55 @@ fun GameScreen(
                     ) {
                         when (gameState.mode) {
                             GameMode.SETTINGS -> {
-                                // Settings screen with version info
-                                Box(
+                                // Settings screen with version info and settings
+                                Column(
                                     modifier = Modifier
                                         .fillMaxSize()
-                                        .background(MaterialTheme.colorScheme.background),
-                                    contentAlignment = Alignment.Center
+                                        .background(MaterialTheme.colorScheme.background)
+                                        .padding(16.dp)
                                 ) {
+                                    // Settings section
+                                    Text(
+                                        text = stringResource(R.string.mode_settings),
+                                        style = MaterialTheme.typography.titleLarge,
+                                        color = MaterialTheme.colorScheme.onSurface,
+                                        modifier = Modifier.padding(bottom = 16.dp)
+                                    )
+
+                                    // Compact mode setting
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 8.dp),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Column(modifier = Modifier.weight(1f)) {
+                                            Text(
+                                                text = stringResource(R.string.settings_compact_mode),
+                                                style = MaterialTheme.typography.bodyLarge,
+                                                color = MaterialTheme.colorScheme.onSurface
+                                            )
+                                            Text(
+                                                text = stringResource(R.string.settings_compact_mode_description),
+                                                style = MaterialTheme.typography.bodySmall,
+                                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                            )
+                                        }
+                                        Switch(
+                                            checked = uiState.isCompactMode,
+                                            onCheckedChange = { enabled ->
+                                                viewModel.onIntent(GameIntent.SetCompactMode(enabled))
+                                            }
+                                        )
+                                    }
+
+                                    Spacer(modifier = Modifier.weight(1f))
+
+                                    // Version info at the bottom
                                     Column(
                                         horizontalAlignment = Alignment.CenterHorizontally,
-                                        verticalArrangement = Arrangement.Center,
-                                        modifier = Modifier.padding(16.dp)
+                                        modifier = Modifier.fillMaxWidth()
                                     ) {
                                         Text(
                                             text = stringResource(R.string.app_name),
@@ -158,7 +197,8 @@ fun GameScreen(
                             },
                             onScoreUpdate = { category, value ->
                                 viewModel.onIntent(GameIntent.UpdateScore(category, value))
-                            }
+                            },
+                            isCompactMode = uiState.isCompactMode
                         )
 
                             // Spacer to allow scrolling past lower region

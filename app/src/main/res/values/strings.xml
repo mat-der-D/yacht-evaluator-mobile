@@ -79,4 +79,8 @@
 
     <!-- App info -->
     <string name="version_format">v %1$s</string>
+
+    <!-- Settings -->
+    <string name="settings_compact_mode">Compact Display</string>
+    <string name="settings_compact_mode_description">Fit score table to screen height</string>
 </resources>

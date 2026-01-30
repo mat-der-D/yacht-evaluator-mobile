@@ -25,7 +25,8 @@ fun ScoreTable(
     onConfirmScore: (Category) -> Unit,
     onScoreClick: (Category) -> Unit,
     onScoreUpdate: (Category, Int?) -> Unit = { _, _ -> },
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isCompactMode: Boolean = false
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         // Upper section
@@ -39,7 +40,8 @@ fun ScoreTable(
                 refreshTrigger = refreshTrigger,
                 onConfirm = { onConfirmScore(category) },
                 onScoreClick = { onScoreClick(category) },
-                onScoreUpdate = { value -> onScoreUpdate(category, value) }
+                onScoreUpdate = { value -> onScoreUpdate(category, value) },
+                isCompactMode = isCompactMode
             )
             HorizontalDivider(color = Outline, thickness = 1.dp)
         }
@@ -47,7 +49,8 @@ fun ScoreTable(
         // Upper total
         TotalRow(
             label = stringResource(R.string.upper_total),
-            score = scoreSheet.upperTotal
+            score = scoreSheet.upperTotal,
+            isCompactMode = isCompactMode
         )
         HorizontalDivider(color = Outline, thickness = 1.dp)
 
@@ -55,7 +58,8 @@ fun ScoreTable(
         TotalRow(
             label = stringResource(R.string.bonus),
             score = scoreSheet.bonus,
-            isBonus = true
+            isBonus = true,
+            isCompactMode = isCompactMode
         )
         HorizontalDivider(color = MaterialTheme.colorScheme.outline, thickness = 2.dp)
 
@@ -70,7 +74,8 @@ fun ScoreTable(
                 refreshTrigger = refreshTrigger,
                 onConfirm = { onConfirmScore(category) },
                 onScoreClick = { onScoreClick(category) },
-                onScoreUpdate = { value -> onScoreUpdate(category, value) }
+                onScoreUpdate = { value -> onScoreUpdate(category, value) },
+                isCompactMode = isCompactMode
             )
             HorizontalDivider(color = Outline, thickness = 1.dp)
         }
@@ -78,7 +83,8 @@ fun ScoreTable(
         // Final total
         TotalRow(
             label = stringResource(R.string.total),
-            score = scoreSheet.finalTotal
+            score = scoreSheet.finalTotal,
+            isCompactMode = isCompactMode
         )
     }
 }

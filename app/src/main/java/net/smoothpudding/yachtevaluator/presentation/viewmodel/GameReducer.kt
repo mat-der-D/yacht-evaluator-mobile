@@ -24,7 +24,8 @@ object GameReducer {
             is GameIntent.ApplyRecommendation -> applyRecommendation(state, intent.recommendation)
             // These intents don't modify GameState directly
             is GameIntent.RequestEvaluation,
-            is GameIntent.DismissEvaluation -> state
+            is GameIntent.DismissEvaluation,
+            is GameIntent.SetCompactMode -> state
         }
     }
 

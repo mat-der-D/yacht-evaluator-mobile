@@ -53,12 +53,16 @@ fun ScoreRow(
     onConfirm: () -> Unit,
     onScoreClick: () -> Unit,
     onScoreUpdate: (Int?) -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isCompactMode: Boolean = false
 ) {
     val isConfirmed = confirmedScore != null
     val backgroundColor = MaterialTheme.colorScheme.surface
     val showConfirmButton = !isConfirmed && rollCount != RollCount.ZERO
     val isAnalysisMode = gameMode == GameMode.ANALYSIS
+    val rowHeight = if (isCompactMode) 28.dp else 38.dp
+    val inputHeight = if (isCompactMode) 24.dp else 32.dp
+    val buttonHeight = if (isCompactMode) 22.dp else 28.dp
 
     // Local state for text input in analysis mode
     var inputText by remember(confirmedScore, refreshTrigger) { mutableStateOf(confirmedScore?.toString() ?: "") }
@@ -93,7 +97,7 @@ fun ScoreRow(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(38.dp)
+                    .height(rowHeight)
                     .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -112,7 +116,7 @@ fun ScoreRow(
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 8.dp)
-                        .height(32.dp)
+                        .height(inputHeight)
                         .border(
                             1.dp,
                             if (validationError.isNotEmpty()) MaterialTheme.colorScheme.error else Color.Gray,
@@ -144,7 +148,7 @@ fun ScoreRow(
                                 contentColor = MaterialTheme.colorScheme.onPrimary
                             ),
                             contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 12.dp),
-                            modifier = Modifier.height(28.dp)
+                            modifier = Modifier.height(buttonHeight)
                         ) {
                             Text(
                                 text = "✓",
@@ -170,7 +174,7 @@ fun ScoreRow(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .height(38.dp)
+                .height(rowHeight)
                 .background(backgroundColor)
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -233,7 +237,7 @@ fun ScoreRow(
                             contentColor = MaterialTheme.colorScheme.onPrimary
                         ),
                         contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 12.dp),
-                        modifier = Modifier.height(28.dp)
+                        modifier = Modifier.height(buttonHeight)
                     ) {
                         Text(
                             text = "✓",
@@ -251,12 +255,15 @@ fun TotalRow(
     label: String,
     score: Int,
     modifier: Modifier = Modifier,
-    isBonus: Boolean = false
+    isBonus: Boolean = false,
+    isCompactMode: Boolean = false
 ) {
+    val rowHeight = if (isCompactMode) 28.dp else 38.dp
+
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(38.dp)
+            .height(rowHeight)
             .background(ConfirmedScoreBackground)
             .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
