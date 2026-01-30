@@ -64,7 +64,7 @@ import net.smoothpudding.yachtevaluator.presentation.state.Recommendation
 import net.smoothpudding.yachtevaluator.ui.theme.Outline
 
 // Height fractions
-private const val DEFAULT_HEIGHT_FRACTION = 0.47f  // ~3.5 items
+private const val DEFAULT_HEIGHT_FRACTION = 0.48f  // ~3.5 items
 private const val MIN_HEIGHT_FRACTION = 0.25f      // ~2.5 items minimum
 private const val MAX_HEIGHT_FRACTION = 0.85f      // 85% screen max
 
@@ -224,9 +224,9 @@ fun EvaluationPanel(
                             }
 
                             is EvaluationUiState.Success -> {
-                                // Current score info
+                                // Note about expected value
                                 Text(
-                                    text = stringResource(R.string.current_score_info, currentScore),
+                                    text = stringResource(R.string.expected_value_note),
                                     style = MaterialTheme.typography.bodyMedium,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                     modifier = Modifier.padding(bottom = 16.dp)

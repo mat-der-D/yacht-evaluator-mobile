@@ -51,7 +51,7 @@
     <string name="evaluation_results">評価結果</string>
     <string name="evaluation_title">評価値</string>
     <string name="error_title">エラー</string>
-    <string name="current_score_info">現在の合計スコア: %1$d点\n※ 期待値は最終スコアの見込みです</string>
+    <string name="expected_value_note">※ 期待値は最終スコアの見込みです</string>
     <string name="reroll_all">すべて振り直す</string>
     <string name="hold_dice_format">%1$s を残す</string>
     <string name="confirm_category_format">%1$s確定</string>
