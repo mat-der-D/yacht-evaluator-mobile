@@ -33,6 +33,17 @@ class GameViewModel @Inject constructor(
         when (intent) {
             is GameIntent.RequestEvaluation -> requestEvaluation()
             is GameIntent.DismissEvaluation -> dismissEvaluation()
+            is GameIntent.ResetGame -> {
+                val newGameState = GameReducer.reduce(_uiState.value.gameState, intent)
+                _uiState.update {
+                    it.copy(
+                        gameState = newGameState,
+                        refreshTrigger = System.currentTimeMillis()
+                    )
+                }
+                updatePredictedScores()
+                dismissEvaluation()
+            }
             else -> {
                 val newGameState = GameReducer.reduce(_uiState.value.gameState, intent)
                 _uiState.update { it.copy(gameState = newGameState) }
@@ -40,7 +51,6 @@ class GameViewModel @Inject constructor(
 
                 // Dismiss evaluation panel on certain actions
                 if (intent is GameIntent.ConfirmScore ||
-                    intent is GameIntent.ResetGame ||
                     intent is GameIntent.ApplyRecommendation
                 ) {
                     dismissEvaluation()

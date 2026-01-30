@@ -49,6 +49,7 @@ fun ScoreRow(
     predictedScore: Int?,
     gameMode: GameMode,
     rollCount: RollCount,
+    refreshTrigger: Long,
     onConfirm: () -> Unit,
     onScoreClick: () -> Unit,
     onScoreUpdate: (Int?) -> Unit = {},
@@ -60,8 +61,8 @@ fun ScoreRow(
     val isAnalysisMode = gameMode == GameMode.ANALYSIS
 
     // Local state for text input in analysis mode
-    var inputText by remember(confirmedScore) { mutableStateOf(confirmedScore?.toString() ?: "") }
-    var validationError by remember { mutableStateOf("") }
+    var inputText by remember(confirmedScore, refreshTrigger) { mutableStateOf(confirmedScore?.toString() ?: "") }
+    var validationError by remember(confirmedScore, refreshTrigger) { mutableStateOf("") }
 
     // Validate input
     val validateAndUpdate = { text: String ->

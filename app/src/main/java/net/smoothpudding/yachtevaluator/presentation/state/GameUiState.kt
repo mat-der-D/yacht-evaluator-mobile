@@ -6,5 +6,6 @@ import net.smoothpudding.yachtevaluator.domain.model.GameState
 data class GameUiState(
     val gameState: GameState = GameState.INITIAL,
     val predictedScores: Map<Category, Int> = emptyMap(),
-    val evaluationState: EvaluationUiState = EvaluationUiState.Idle
+    val evaluationState: EvaluationUiState = EvaluationUiState.Idle,
+    val refreshTrigger: Long = 0L
 )

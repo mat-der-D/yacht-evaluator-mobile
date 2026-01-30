@@ -21,6 +21,7 @@ fun ScoreTable(
     predictedScores: Map<Category, Int>,
     gameMode: GameMode,
     rollCount: RollCount,
+    refreshTrigger: Long,
     onConfirmScore: (Category) -> Unit,
     onScoreClick: (Category) -> Unit,
     onScoreUpdate: (Category, Int?) -> Unit = { _, _ -> },
@@ -35,6 +36,7 @@ fun ScoreTable(
                 predictedScore = predictedScores[category],
                 gameMode = gameMode,
                 rollCount = rollCount,
+                refreshTrigger = refreshTrigger,
                 onConfirm = { onConfirmScore(category) },
                 onScoreClick = { onScoreClick(category) },
                 onScoreUpdate = { value -> onScoreUpdate(category, value) }
@@ -65,6 +67,7 @@ fun ScoreTable(
                 predictedScore = predictedScores[category],
                 gameMode = gameMode,
                 rollCount = rollCount,
+                refreshTrigger = refreshTrigger,
                 onConfirm = { onConfirmScore(category) },
                 onScoreClick = { onScoreClick(category) },
                 onScoreUpdate = { value -> onScoreUpdate(category, value) }

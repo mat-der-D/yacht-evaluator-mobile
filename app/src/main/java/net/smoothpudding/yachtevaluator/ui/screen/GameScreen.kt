@@ -119,6 +119,7 @@ fun GameScreen(
                             predictedScores = uiState.predictedScores,
                             gameMode = gameState.mode,
                             rollCount = gameState.rollCount,
+                            refreshTrigger = uiState.refreshTrigger,
                             onConfirmScore = { category ->
                                 viewModel.onIntent(GameIntent.ConfirmScore(category))
                             },
