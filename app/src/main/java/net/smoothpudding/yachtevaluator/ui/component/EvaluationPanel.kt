@@ -57,7 +57,7 @@ import net.smoothpudding.yachtevaluator.presentation.state.Recommendation
 import net.smoothpudding.yachtevaluator.ui.theme.Outline
 
 // Height fractions
-private const val DEFAULT_HEIGHT_FRACTION = 0.45f  // ~4.5 items
+private const val DEFAULT_HEIGHT_FRACTION = 0.45f  // ~3.5 items
 private const val MIN_HEIGHT_FRACTION = 0.25f      // ~2.5 items minimum
 private const val MAX_HEIGHT_FRACTION = 0.85f      // 85% screen max
 
