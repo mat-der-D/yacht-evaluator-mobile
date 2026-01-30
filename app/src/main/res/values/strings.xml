@@ -45,6 +45,7 @@
     <string name="upper_total">Subtotal</string>
     <string name="bonus">Bonus</string>
     <string name="total">Total</string>
+    <string name="score_format">Score: %1$d</string>
 
     <!-- Evaluation -->
     <string name="evaluation_results">Evaluation Results</string>

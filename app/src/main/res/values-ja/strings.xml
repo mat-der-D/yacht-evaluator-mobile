@@ -45,6 +45,7 @@
     <string name="upper_total">小計</string>
     <string name="bonus">ボーナス</string>
     <string name="total">合計</string>
+    <string name="score_format">スコア: %1$d</string>
 
     <!-- Evaluation -->
     <string name="evaluation_results">評価結果</string>

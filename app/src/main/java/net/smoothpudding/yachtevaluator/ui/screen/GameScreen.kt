@@ -5,10 +5,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.background
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -47,6 +50,7 @@ import net.smoothpudding.yachtevaluator.presentation.viewmodel.GameViewModel
 import net.smoothpudding.yachtevaluator.BuildConfig
 import net.smoothpudding.yachtevaluator.ui.component.DiceRow
 import net.smoothpudding.yachtevaluator.ui.component.EvaluationPanel
+import net.smoothpudding.yachtevaluator.ui.component.GameHeader
 import net.smoothpudding.yachtevaluator.ui.component.ModeTabs
 import net.smoothpudding.yachtevaluator.ui.component.RollButton
 import net.smoothpudding.yachtevaluator.ui.component.RollCountSelector
@@ -83,6 +87,7 @@ fun GameScreen(
             Scaffold(
                 snackbarHost = { SnackbarHost(snackbarHostState) },
                 containerColor = MaterialTheme.colorScheme.background,
+                contentWindowInsets = WindowInsets(0, 0, 0, 0),
                 bottomBar = {
                     ModeTabs(
                         currentMode = gameState.mode,
@@ -90,19 +95,26 @@ fun GameScreen(
                     )
                 }
             ) { paddingValues ->
-                Box(
+                Column(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(paddingValues)
                 ) {
-                    // Upper scrollable region
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .verticalScroll(rememberScrollState())
+                    // Fixed header
+                    GameHeader(currentScore = gameState.scoreSheet.finalTotal)
+
+                    // Scrollable content
+                    Box(
+                        modifier = Modifier.fillMaxSize()
                     ) {
-                        // Score table
-                        ScoreTable(
+                        // Upper scrollable region
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .verticalScroll(rememberScrollState())
+                        ) {
+                            // Score table
+                            ScoreTable(
                             scoreSheet = gameState.scoreSheet,
                             predictedScores = uiState.predictedScores,
                             gameMode = gameState.mode,
@@ -130,29 +142,29 @@ fun GameScreen(
                             textAlign = TextAlign.Center
                         )
 
-                        // Spacer to allow scrolling past lower region
-                        Spacer(modifier = Modifier.height(LowerRegionHeight))
-                    }
+                            // Spacer to allow scrolling past lower region
+                            Spacer(modifier = Modifier.height(LowerRegionHeight))
+                        }
 
-                    // Gray divider
-                    HorizontalDivider(
-                        modifier = Modifier
-                            .align(Alignment.BottomCenter)
-                            .padding(bottom = LowerRegionHeight),
-                        thickness = 2.dp,
-                        color = MaterialTheme.colorScheme.outlineVariant
-                    )
+                        // Gray divider
+                        HorizontalDivider(
+                            modifier = Modifier
+                                .align(Alignment.BottomCenter)
+                                .padding(bottom = LowerRegionHeight),
+                            thickness = 2.dp,
+                            color = MaterialTheme.colorScheme.outlineVariant
+                        )
 
-                    // Lower fixed region
-                    Column(
-                        modifier = Modifier
-                            .align(Alignment.BottomCenter)
-                            .height(LowerRegionHeight)
-                            .fillMaxWidth()
-                            .background(MaterialTheme.colorScheme.background)
-                            .padding(vertical = 8.dp, horizontal = 16.dp),
-                        verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.Bottom)
-                    ) {
+                        // Lower fixed region
+                        Column(
+                            modifier = Modifier
+                                .align(Alignment.BottomCenter)
+                                .height(LowerRegionHeight)
+                                .fillMaxWidth()
+                                .background(MaterialTheme.colorScheme.background)
+                                .padding(vertical = 8.dp, horizontal = 16.dp),
+                            verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.Bottom)
+                        ) {
                         // Action buttons
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -231,6 +243,7 @@ fun GameScreen(
                                 }
                             }
                         )
+                    }
                     }
                 }
 
