@@ -2,6 +2,7 @@ package net.smoothpudding.yachtevaluator.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -40,6 +41,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import net.smoothpudding.yachtevaluator.R
@@ -60,6 +62,8 @@ import net.smoothpudding.yachtevaluator.ui.theme.LocalModeColors
 import net.smoothpudding.yachtevaluator.ui.theme.YachtEvaluatorTheme
 
 private val LowerRegionHeight = 180.dp
+private const val SCORE_TABLE_ROW_COUNT = 15
+private val DividerTotalHeight = 16.dp
 
 @Composable
 fun GameScreen(
@@ -175,6 +179,13 @@ fun GameScreen(
                                 }
                             }
                             GameMode.PLAY, GameMode.ANALYSIS -> {
+                        // Calculate compact row height dynamically
+                        BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+                            val compactRowHeight: Dp? = if (uiState.isCompactMode) {
+                                val availableHeightForTable = maxHeight - LowerRegionHeight - DividerTotalHeight
+                                availableHeightForTable / SCORE_TABLE_ROW_COUNT
+                            } else null
+
                         // Upper scrollable region
                         Column(
                             modifier = Modifier
@@ -198,7 +209,8 @@ fun GameScreen(
                             onScoreUpdate = { category, value ->
                                 viewModel.onIntent(GameIntent.UpdateScore(category, value))
                             },
-                            isCompactMode = uiState.isCompactMode
+                            isCompactMode = uiState.isCompactMode,
+                            compactRowHeight = compactRowHeight
                         )
 
                             // Spacer to allow scrolling past lower region
@@ -307,6 +319,7 @@ fun GameScreen(
                             }
                         )
                     }
+                        } // BoxWithConstraints
                             }
                         }
                     }

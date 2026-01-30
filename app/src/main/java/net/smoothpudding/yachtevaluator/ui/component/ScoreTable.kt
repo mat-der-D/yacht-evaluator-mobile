@@ -7,6 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.smoothpudding.yachtevaluator.R
 import net.smoothpudding.yachtevaluator.domain.model.Category
@@ -26,7 +27,8 @@ fun ScoreTable(
     onScoreClick: (Category) -> Unit,
     onScoreUpdate: (Category, Int?) -> Unit = { _, _ -> },
     modifier: Modifier = Modifier,
-    isCompactMode: Boolean = false
+    isCompactMode: Boolean = false,
+    compactRowHeight: Dp? = null
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         // Upper section
@@ -41,7 +43,8 @@ fun ScoreTable(
                 onConfirm = { onConfirmScore(category) },
                 onScoreClick = { onScoreClick(category) },
                 onScoreUpdate = { value -> onScoreUpdate(category, value) },
-                isCompactMode = isCompactMode
+                isCompactMode = isCompactMode,
+                compactRowHeight = compactRowHeight
             )
             HorizontalDivider(color = Outline, thickness = 1.dp)
         }
@@ -50,7 +53,8 @@ fun ScoreTable(
         TotalRow(
             label = stringResource(R.string.upper_total),
             score = scoreSheet.upperTotal,
-            isCompactMode = isCompactMode
+            isCompactMode = isCompactMode,
+            compactRowHeight = compactRowHeight
         )
         HorizontalDivider(color = Outline, thickness = 1.dp)
 
@@ -59,7 +63,8 @@ fun ScoreTable(
             label = stringResource(R.string.bonus),
             score = scoreSheet.bonus,
             isBonus = true,
-            isCompactMode = isCompactMode
+            isCompactMode = isCompactMode,
+            compactRowHeight = compactRowHeight
         )
         HorizontalDivider(color = MaterialTheme.colorScheme.outline, thickness = 2.dp)
 
@@ -75,7 +80,8 @@ fun ScoreTable(
                 onConfirm = { onConfirmScore(category) },
                 onScoreClick = { onScoreClick(category) },
                 onScoreUpdate = { value -> onScoreUpdate(category, value) },
-                isCompactMode = isCompactMode
+                isCompactMode = isCompactMode,
+                compactRowHeight = compactRowHeight
             )
             HorizontalDivider(color = Outline, thickness = 1.dp)
         }
@@ -84,7 +90,8 @@ fun ScoreTable(
         TotalRow(
             label = stringResource(R.string.total),
             score = scoreSheet.finalTotal,
-            isCompactMode = isCompactMode
+            isCompactMode = isCompactMode,
+            compactRowHeight = compactRowHeight
         )
     }
 }
