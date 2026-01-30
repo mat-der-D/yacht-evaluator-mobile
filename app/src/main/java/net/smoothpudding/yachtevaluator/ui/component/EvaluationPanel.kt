@@ -52,7 +52,11 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import net.smoothpudding.yachtevaluator.R
 import net.smoothpudding.yachtevaluator.domain.model.GameMode
 import net.smoothpudding.yachtevaluator.presentation.state.EvaluationUiState
@@ -348,8 +352,23 @@ private fun RecommendationItem(
                                 else -> die.toString()
                             }
                         }
+                        val formatString = stringResource(R.string.hold_dice_format, diceText)
+                        val diceStartIndex = formatString.indexOf(diceText)
+
+                        val annotatedText = buildAnnotatedString {
+                            if (diceStartIndex >= 0) {
+                                append(formatString.substring(0, diceStartIndex))
+                                withStyle(style = SpanStyle(fontSize = MaterialTheme.typography.titleMedium.fontSize * 1.5)) {
+                                    append(diceText)
+                                }
+                                append(formatString.substring(diceStartIndex + diceText.length))
+                            } else {
+                                append(formatString)
+                            }
+                        }
+
                         Text(
-                            text = stringResource(R.string.hold_dice_format, diceText),
+                            text = annotatedText,
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface
                         )
