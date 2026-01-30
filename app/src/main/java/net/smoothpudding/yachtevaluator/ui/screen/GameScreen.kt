@@ -109,12 +109,31 @@ fun GameScreen(
                     ) {
                         when (gameState.mode) {
                             GameMode.SETTINGS -> {
-                                // Settings screen - empty white page
+                                // Settings screen with version info
                                 Box(
                                     modifier = Modifier
                                         .fillMaxSize()
-                                        .background(MaterialTheme.colorScheme.background)
-                                )
+                                        .background(MaterialTheme.colorScheme.background),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Column(
+                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                        verticalArrangement = Arrangement.Center,
+                                        modifier = Modifier.padding(16.dp)
+                                    ) {
+                                        Text(
+                                            text = stringResource(R.string.app_name),
+                                            style = MaterialTheme.typography.headlineMedium,
+                                            color = MaterialTheme.colorScheme.onSurface
+                                        )
+                                        Spacer(modifier = Modifier.height(8.dp))
+                                        Text(
+                                            text = stringResource(R.string.version_format, BuildConfig.VERSION_NAME),
+                                            style = MaterialTheme.typography.bodyLarge,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+                                }
                             }
                             GameMode.PLAY, GameMode.ANALYSIS -> {
                         // Upper scrollable region
@@ -140,17 +159,6 @@ fun GameScreen(
                             onScoreUpdate = { category, value ->
                                 viewModel.onIntent(GameIntent.UpdateScore(category, value))
                             }
-                        )
-
-                        // Version info
-                        Text(
-                            text = stringResource(R.string.version_format, BuildConfig.VERSION_NAME),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 16.dp),
-                            textAlign = TextAlign.Center
                         )
 
                             // Spacer to allow scrolling past lower region
